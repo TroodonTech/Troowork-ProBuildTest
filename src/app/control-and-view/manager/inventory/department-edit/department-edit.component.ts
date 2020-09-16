@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
 })
 export class DepartmentEditComponent implements OnInit {
   deptKey$: Object;
-  dept: Array<any>;
+  dept;
 
 
   role: String;
@@ -70,7 +70,7 @@ export class DepartmentEditComponent implements OnInit {
     this.employeekey = profile.employeekey;
     this.OrganizationID = profile.OrganizationID;
 
-    this.inventoryService.EditDepartment(this.deptKey$, this.OrganizationID).subscribe((data: Array<any>) => {
+    this.inventoryService.EditDepartment(this.deptKey$, this.OrganizationID).subscribe((data: any[]) => {
 
       this.dept = data[0];
     });

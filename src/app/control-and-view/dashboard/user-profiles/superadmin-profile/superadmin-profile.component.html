@@ -33,11 +33,11 @@
             <div>
               <!-- <div class="row col-md-12" style="margin-left: 45%"> -->
 
-              <button type="button" style="text-align:center" class="btn btn-success" [disabled]="fileCheck"
+              <button type="button" style="text-align:center;width: 18%;" class="btn btn-success" [disabled]="fileCheck"
                 (click)="ImgUpload();"><b>UPLOAD</b></button>
             </div>
             <div class='buttonDiv'>
-              <button style="margin-top: 1rem;width: 12rem;" class="btn btn-primary"
+              <button class="btn btn-primary" style="width: 18%;"
                 [routerLink]="['changePasswordSuperAdmin',profile.EmployeeKey,profile.UserRoleName,profile.IsSupervisor]"
                 routerLinkActive="active">
                 <span><b>CHANGE PASSWORD</b></span></button>

@@ -22,7 +22,7 @@ export class RoomTypeCreateComponent implements OnInit {
   employeekey: Number;
   IsSupervisor: Number;
   OrganizationID: Number;
-
+  RoomTypeName;
 
   numberValid(event: any) {
     const pattern = /[0-9\+\-\ ]/;

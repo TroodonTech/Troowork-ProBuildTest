@@ -10,9 +10,9 @@ import { Location } from '@angular/common';
   styleUrls: ['./department-create.component.scss']
 })
 export class DepartmentCreateComponent implements OnInit {
-  dept: Inventory[];
+  dept;
   createbuilding: FormGroup;
-
+  DepartmentName;
   role: String;
   name: String;
   employeekey: Number;
@@ -45,7 +45,7 @@ export class DepartmentCreateComponent implements OnInit {
     }
     else {
       DepartmentName=DepartmentName.trim();
-      this.inventoryServ.checkForNewDepartment(DepartmentName, this.employeekey, this.OrganizationID).subscribe((data: Inventory[]) => {
+      this.inventoryServ.checkForNewDepartment(DepartmentName, this.employeekey, this.OrganizationID).subscribe((data: any[]) => {
         this.dept = data;
         if (data.length > 0) {
           alert("Department already present");

@@ -15,7 +15,7 @@ export class InspectiontemplateandquestionsViewComponent implements OnInit {
   IsSupervisor: Number;
   OrganizationID: Number;
   TemplateID;
-
+  loading;
   url_base64_decode(str) {
     var output = str.replace('-', '+').replace('_', '/');
     switch (output.length % 4) {

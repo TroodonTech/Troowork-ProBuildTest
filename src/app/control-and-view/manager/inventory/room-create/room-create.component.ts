@@ -17,7 +17,7 @@ export class RoomCreateComponent implements OnInit {
   zone: Inventory[];
   floorType: Inventory[];
   roomType: Inventory[];
-  Barcode: Array<any>;
+  Barcode;
   FacilityKey;
   FloorTypeKey;
   ZoneKey;
@@ -137,7 +137,7 @@ export class RoomCreateComponent implements OnInit {
                             alert("Room created successfully");
                             this.inventoryService
                               .getBarcodeForRoom(this.employeekey, this.OrganizationID)
-                              .subscribe((data: Array<any>) => {
+                              .subscribe((data: any[]) => {
                                 this.Barcode = data[0];
                                 this.temp_barcode = data[0];
                                 this.RoomName = null;
@@ -187,7 +187,7 @@ export class RoomCreateComponent implements OnInit {
       });
     this.inventoryService
       .getBarcodeForRoom(this.employeekey, this.OrganizationID)
-      .subscribe((data: Array<any>) => {
+      .subscribe((data: any[]) => {
         this.Barcode = data[0];
         this.temp_barcode = data[0];
       });

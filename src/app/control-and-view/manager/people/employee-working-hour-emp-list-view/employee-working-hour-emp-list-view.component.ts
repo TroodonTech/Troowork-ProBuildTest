@@ -22,7 +22,7 @@ export class EmployeeWorkingHourEmpListViewComponent implements OnInit {
   IsSupervisor: Number;
   OrganizationID: Number;
   searchform: FormGroup;
-
+  loading;
   employeedetailstable=[];
   url_base64_decode(str) {
     var output = str.replace('-', '+').replace('_', '/');

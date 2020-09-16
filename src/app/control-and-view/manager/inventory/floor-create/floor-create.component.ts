@@ -19,6 +19,7 @@ export class FloorCreateComponent implements OnInit {
   IsSupervisor: Number;
   OrganizationID: Number;
   FacilityKey;
+  FloorName;FloorDescription;
   url_base64_decode(str) {
     var output = str.replace('-', '+').replace('_', '/');
     switch (output.length % 4) {

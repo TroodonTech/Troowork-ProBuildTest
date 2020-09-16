@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Inventory } from '../../../../model-class/Inventory';
+// import { Inventory } from '../../../../model-class/Inventory';
 import { InventoryService } from '../../../../service/inventory.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
@@ -11,13 +11,13 @@ import { Location } from '@angular/common';
   styleUrls: ['./equipment-create.component.scss']
 })
 export class EquipmentCreateComponent implements OnInit {
-  dept: Inventory[];
-  equipmentType: Inventory[];
-  buildings: Inventory[];
-  floors: Inventory[];
+  dept;
+  equipmentType;
+  buildings;
+  floors;
   FacKey: Number;
   EquipmentTypeDescription: String;
-  barcode: Array<Inventory>;
+  barcode;
   FloorKey;
   FacilityKey;
   role: String;
@@ -26,7 +26,7 @@ export class EquipmentCreateComponent implements OnInit {
   IsSupervisor: Number;
   OrganizationID: Number;
   EquipmentTypeKey;
-
+  EquipmentDescription; EquipmentName;
   url_base64_decode(str) {
     var output = str.replace('-', '+').replace('_', '/');
     switch (output.length % 4) {
@@ -53,7 +53,7 @@ export class EquipmentCreateComponent implements OnInit {
     if (facKey) {
       this.inventoryService
         .getallFloorList(facKey, this.OrganizationID)
-        .subscribe((data: Inventory[]) => {
+        .subscribe((data: any[]) => {
           this.floors = data;
         });
     }
@@ -87,14 +87,19 @@ export class EquipmentCreateComponent implements OnInit {
       alert("Floor is not provided");
     } else {
       EquipmentName = EquipmentName.trim();
-      EquipmentDescription = EquipmentDescription.trim();
-      this.inventoryService.checkForNewEquipment(EquipmentTypeKey, EquipmentName, this.employeekey, this.OrganizationID).subscribe((data: Inventory[]) => {
+      if (!(EquipmentDescription) || !(EquipmentName.trim())) {
+        EquipmentDescription = EquipmentDescription;
+      }
+      else {
+        EquipmentDescription = EquipmentDescription.trim();
+      }
+      this.inventoryService.checkForNewEquipment(EquipmentTypeKey, EquipmentName, this.employeekey, this.OrganizationID).subscribe((data: any[]) => {
         this.dept = data;
         if (this.dept[0].count > 0) {
           alert("Equipment already present");
         }
         else if (this.dept[0].count == 0) {
-          this.inventoryService.checkForNewEquipmentbarcode(Barcode, this.OrganizationID).subscribe((data: Inventory[]) => {
+          this.inventoryService.checkForNewEquipmentbarcode(Barcode, this.OrganizationID).subscribe((data: any[]) => {
             this.dept = data;
             if (this.dept[0].count > 0) {
               alert("Equipment Barcode already present");
@@ -126,18 +131,18 @@ export class EquipmentCreateComponent implements OnInit {
 
     this.inventoryService
       .getAllEquipmentType(this.employeekey, this.OrganizationID)
-      .subscribe((data: Inventory[]) => {
+      .subscribe((data: any[]) => {
         this.equipmentType = data;
       });
     this.inventoryService
       .getBarcodeForEquipment(this.employeekey, this.OrganizationID)
-      .subscribe((data: Array<any>) => {
+      .subscribe((data: any[]) => {
         this.barcode = data[0];
       });
 
     this.inventoryService
       .getallBuildingList(this.employeekey, this.OrganizationID)
-      .subscribe((data: Inventory[]) => {
+      .subscribe((data: any[]) => {
         this.buildings = data;
       });
   }

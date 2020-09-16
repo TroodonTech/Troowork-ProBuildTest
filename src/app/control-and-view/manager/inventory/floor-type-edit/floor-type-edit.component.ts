@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
 })
 export class FloorTypeEDitComponent implements OnInit {
   flrTypeKey$: Object;
-  flrType: Array<any>;
+  flrType;
   role: String;
   name: String;
   employeekey: Number;
@@ -68,7 +68,7 @@ export class FloorTypeEDitComponent implements OnInit {
     this.employeekey = profile.employeekey;
     this.OrganizationID = profile.OrganizationID;
 
-    this.inventoryService.EditFloorType(this.flrTypeKey$, this.OrganizationID).subscribe((data: Array<any>) => {
+    this.inventoryService.EditFloorType(this.flrTypeKey$, this.OrganizationID).subscribe((data: any[]) => {
       this.flrType = data[0];
     });
   }

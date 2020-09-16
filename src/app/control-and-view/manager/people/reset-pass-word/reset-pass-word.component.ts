@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { People } from '../../../../model-class/People';
+// import { People } from '../../../../model-class/People';
 import { PeopleServiceService } from '../../../../service/people-service.service';
 import { ActivatedRoute, Router } from "@angular/router";
 import { HttpClient } from '@angular/common/http';
@@ -15,7 +15,7 @@ export class ResetPassWordComponent implements OnInit {
   response: Object;
   managerMail: Object;
   userMail: Object;
-  build: People[];
+  build;
 
   role: String;
   name: String;
@@ -53,7 +53,7 @@ export class ResetPassWordComponent implements OnInit {
       if(username){
         username=username.trim();
       }
-      this.peopleService.resetUserPassword(username, password, this.empKey$, userLoginId, this.employeekey, this.OrganizationID).subscribe((data: People[]) => {
+      this.peopleService.resetUserPassword(username, password, this.empKey$, userLoginId, this.employeekey, this.OrganizationID).subscribe((data: any[]) => {
         this.response = data[0];
         this.build = data;
         // this.router.navigate(['/ManagerDashBoard', { outlets: { ManagerOut: ['manageLoginCredentials'] } }]);
@@ -68,7 +68,7 @@ export class ResetPassWordComponent implements OnInit {
 
       if (this.build.length > 0) { // resetUserPassword returns username. just to make sure that the reset action was done properly, we are returnig the username
 
-        this.peopleService.getUserEmail(username, this.employeekey, this.OrganizationID).subscribe((data: People[]) => {
+        this.peopleService.getUserEmail(username, this.employeekey, this.OrganizationID).subscribe((data: any[]) => {
 
           this.managerMail = data[0].EmailID;
           this.userMail = data[0].newmail;
@@ -105,7 +105,7 @@ export class ResetPassWordComponent implements OnInit {
     this.employeekey = profile.employeekey;
     this.OrganizationID = profile.OrganizationID;
 
-    this.peopleService.getLoginDetailsByEmpKey(this.empKey$, this.OrganizationID).subscribe((data: People[]) => {
+    this.peopleService.getLoginDetailsByEmpKey(this.empKey$, this.OrganizationID).subscribe((data: any[]) => {
       this.build = data;
     });
 

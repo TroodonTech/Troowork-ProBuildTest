@@ -193,8 +193,8 @@ export class EmployeesDowntimeReportComponent implements OnInit {
         gridLines: {
           display: true
         },
-        categoryPercentage: 1.0,
-        barPercentage: 0.5,
+        // categoryPercentage: 1.0,
+        // barPercentage: 0.5,
         ticks: {
           beginAtZero: true,
           fontFamily: "'Open Sans Bold', sans-serif",
@@ -208,7 +208,7 @@ export class EmployeesDowntimeReportComponent implements OnInit {
         },
       }],
       yAxes: [{
-        barThickness: 100,
+        // barThickness: 100,
         display: true,
         gridLines: {
           display: true

@@ -15,7 +15,7 @@ export class ResetPasswordsComponent implements OnInit {
   response: Object;
   managerMail: Object;
   userMail: Object;
-  build: People[];
+  build;
 
   role: String;
   name: String;
@@ -95,7 +95,7 @@ export class ResetPasswordsComponent implements OnInit {
     this.employeekey = profile.employeekey;
     this.OrganizationID = profile.OrganizationID;
 
-    this.peopleService.getLoginDetailsByEmpKey(this.empKey$, this.OrganizationID).subscribe((data: People[]) => {
+    this.peopleService.getLoginDetailsByEmpKey(this.empKey$, this.OrganizationID).subscribe((data: any[]) => {
       this.build = data;
     });
   }

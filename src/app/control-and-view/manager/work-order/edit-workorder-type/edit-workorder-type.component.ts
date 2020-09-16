@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, Directive, HostListener, ElementRef, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { workorder } from '../../../../model-class/work-order';
+// import { workorder } from '../../../../model-class/work-order';
 import { WorkOrderServiceService } from '../../../../service/work-order-service.service';
 import { ActivatedRoute, Router } from "@angular/router";
 
@@ -45,7 +45,7 @@ export class EditWorkorderTypeComponent implements OnInit {
   }
 
   WOT_Key;
-  workorderTypeList: workorder[];
+  workorderTypeList;
   update_WO;
   numberValid(event: any) {
     const pattern = /[0-9\.\ ]/;

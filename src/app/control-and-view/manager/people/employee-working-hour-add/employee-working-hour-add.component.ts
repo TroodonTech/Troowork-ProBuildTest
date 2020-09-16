@@ -17,7 +17,7 @@ export class EmployeeWorkingHourAddComponent implements OnInit {
   IsSupervisor: Number;
   OrganizationID: Number;
   empList;
-
+  loading;
   employee_Key;
   date;
   StartTime;

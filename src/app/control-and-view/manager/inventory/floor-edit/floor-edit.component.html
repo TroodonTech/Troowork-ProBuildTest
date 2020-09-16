@@ -10,7 +10,8 @@
 
       <div class="col-md-8 col-lg-8 col-sm-8" style="text-align:left">
 
-        <select style="background-color: #D4F4FF !important; " class="form-control" [(ngModel)]="flooroptions[0].FacilityKey">
+        <select style="background-color: #D4F4FF !important; " *ngIf="flooroptions" class="form-control"
+          [(ngModel)]="flooroptions[0].FacilityKey">
           <option *ngFor="let f of buildingList" [value]="f.FacilityKey">
             {{f.FacilityText}}
           </option>
@@ -23,8 +24,8 @@
 
       <div class="col-md-8 col-lg-8 col-sm-8" style="text-align:left">
 
-        <input type="text" maxlength="25" style="background-color: #D4F4FF !important;" class="form-control" class="form-control"
-          [(ngModel)]="flooroptions[0].FloorName">
+        <input type="text" maxlength="25" *ngIf="flooroptions" style="background-color: #D4F4FF !important;"
+          class="form-control" class="form-control" [(ngModel)]="flooroptions[0].FloorName">
       </div>
     </div>
     <br>
@@ -33,8 +34,8 @@
 
       <div class="col-md-8 col-lg-8 col-sm-8" style="text-align:left">
 
-        <input type="text" maxlength="40" style="background-color: #D4F4FF !important;" class="form-control"
-          [(ngModel)]="flooroptions[0].FloorDescription">
+        <input type="text" maxlength="40" *ngIf="flooroptions" style="background-color: #D4F4FF !important;"
+          class="form-control" [(ngModel)]="flooroptions[0].FloorDescription">
       </div>
     </div>
     <br>

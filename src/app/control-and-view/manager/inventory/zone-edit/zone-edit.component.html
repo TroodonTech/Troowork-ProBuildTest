@@ -9,7 +9,7 @@
     <div class="row col-md-12">
       <h5 style="text-align:right" class="col-md-4"><label for="building">Building* </label></h5>
       <div class="col-md-8 col-lg-8 col-sm-8" style="text-align:left">
-        <select style="background-color: #D4F4FF !important; " class="form-control" [(ngModel)]="zoneEditValues.FacilityKey"
+        <select style="background-color: #D4F4FF !important; " *ngIf="zoneEditValues" class="form-control" [(ngModel)]="zoneEditValues.FacilityKey"
           (change)="selectFloorfromBuildings($event.target.value)">
           <option value="">--Select--</option>
           <option *ngFor="let f of buildingList" [value]="f.FacilityKey">
@@ -22,7 +22,7 @@
     <div class="row col-md-12">
       <h5 style="text-align:right" class="col-md-4"><label for="floorname">Floor Name* </label></h5>
       <div class="col-md-8 col-lg-8 col-sm-8" style="text-align:left">
-        <select style="background-color: #D4F4FF !important;" class="form-control" [(ngModel)]="zoneEditValues.FloorKey">
+        <select style="background-color: #D4F4FF !important;" *ngIf="zoneEditValues" class="form-control" [(ngModel)]="zoneEditValues.FloorKey">
           <option value="">--Select--</option>
           <option *ngFor="let f of floorList" [value]="f.FloorKey">
             {{f.FloorName}}
@@ -34,7 +34,7 @@
     <div class="row col-md-12">
       <h5 style="text-align:right" class="col-md-4"><label for="building">Zone Name* </label></h5>
       <div class="col-md-8 col-lg-8 col-sm-8" style="text-align:left">
-        <input type="text" maxlength="20" style="background-color: #D4F4FF !important;" class="form-control"
+        <input type="text" maxlength="20" *ngIf="zoneEditValues" style="background-color: #D4F4FF !important;" class="form-control"
           [(ngModel)]="zoneEditValues.ZoneName">
       </div>
     </div>

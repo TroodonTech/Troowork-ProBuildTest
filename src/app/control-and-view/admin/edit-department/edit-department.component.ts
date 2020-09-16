@@ -9,7 +9,7 @@ import { InventoryService } from '../../../service/inventory.service';
 })
 export class EditDepartmentComponent implements OnInit {
   deptKey$: Object;
-  dept: Array<any>;
+  dept;
 
   role: String;
   name: String;
@@ -70,7 +70,7 @@ export class EditDepartmentComponent implements OnInit {
     this.employeekey = profile.employeekey;
     this.OrganizationID = profile.OrganizationID;
 
-    this.inventoryService.EditDepartment(this.deptKey$, this.OrganizationID).subscribe((data: Array<any>) => {
+    this.inventoryService.EditDepartment(this.deptKey$, this.OrganizationID).subscribe((data: any[]) => {
       this.dept = data[0];
     });
   }

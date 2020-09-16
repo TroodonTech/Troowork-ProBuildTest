@@ -18,7 +18,7 @@ export class ViewMasterShiftsComponent implements OnInit {
 
   shiftdetails;
   delete_shiftKey;
-
+  loading;
   url_base64_decode(str) {
     var output = str.replace('-', '+').replace('_', '/');
     switch (output.length % 4) {

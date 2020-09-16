@@ -8,21 +8,22 @@
   <div class="col-md-12 bg-info" style="padding-top:2rem">
     <div class="row col-md-12">
       <h5 style="text-align:right" class="col-md-4"><label for="scheduling">Assignment Name*: </label></h5>
-      <input type="text" maxlength="30" style="background-color: #D4F4FF !important;"
+      <input type="text" maxlength="30" style="background-color: #D4F4FF !important;" *ngIf="scheduleDetails"
         class="form-control col-md-8 col-lg-8 col-sm-8" [(ngModel)]="scheduleDetails.BatchSchduleName">
     </div>
     <br>
     <div class="row col-md-12">
       <h5 style="text-align:right" class="col-md-4"><label for="scheduling">Assignment Description*:
         </label></h5>
-      <input type="text" maxlength="45" style="background-color: #D4F4FF !important;"
+      <input type="text" maxlength="45" style="background-color: #D4F4FF !important;" *ngIf="scheduleDetails"
         class="form-control col-md-8 col-lg-8 col-sm-8" [(ngModel)]="scheduleDetails.ScheduleDescription">
     </div>
     <br>
     <div class="row col-md-12">
       <h5 style="text-align:right" class="col-md-4"><label for="scheduling">Employee*: </label></h5>
-      <select style="background-color: #D4F4FF !important;" (change)="setEmployeeForbatchSchedule($event.target.value)"
-        class="form-control col-md-8 col-lg-8 col-sm-8" [(ngModel)]="scheduleDetails.EmployeeKey">
+      <select style="background-color: #D4F4FF !important;" *ngIf="scheduleDetails"
+        (change)="setEmployeeForbatchSchedule($event.target.value)" class="form-control col-md-8 col-lg-8 col-sm-8"
+        [(ngModel)]="scheduleDetails.EmployeeKey">
         <option>--Select--</option>
         <option *ngFor="let f of empList" [value]="f.EmployeeKey">
           {{f.EmployeeText}}
@@ -31,8 +32,8 @@
     </div>
     <div class="row col-md-12" style="padding-top: 2%;">
       <h5 style="text-align:right" class="col-md-4"><label for="scheduling">Shift: </label></h5>
-      <select style="background-color: #D4F4FF !important;" class="form-control col-md-8 col-lg-8 col-sm-8"
-        [(ngModel)]="scheduleDetails.Master_shiftID">
+      <select style="background-color: #D4F4FF !important;" *ngIf="scheduleDetails"
+        class="form-control col-md-8 col-lg-8 col-sm-8" [(ngModel)]="scheduleDetails.Master_shiftID">
         <option value="0">--Select--</option>
         <option *ngFor="let b of shiftdetails" [value]="b.Master_shiftID">
           {{b.ShiftName}}
@@ -57,7 +58,8 @@
     <br>
     <div class="text-center col-md-12">
       <label>Apply Changes For All Workorders</label>&nbsp;
-      <input type="checkbox" [(ngModel)]="scheduleDetails.checkBoxValue" [value]=scheduleDetails.checkBoxValue>
+      <input type="checkbox" *ngIf="scheduleDetails" [(ngModel)]="scheduleDetails.checkBoxValue"
+        [value]=scheduleDetails.checkBoxValue>
     </div>
     <br>
     <div class="row col-md-12" style="margin-left: 42%;">

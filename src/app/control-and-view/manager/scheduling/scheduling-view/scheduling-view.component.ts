@@ -83,14 +83,30 @@ export class SchedulingViewComponent implements OnInit {
 
   cancelEmpChange() {
     this.editEmp = -1;
-    if (this.SearchSchedule.trim().length >= 3) {
-      this.scheduleService
-        .searchBatchScheduleName(this.SearchSchedule.trim(), this.OrganizationID)
-        .subscribe((data: any[]) => {
-          this.scheduleList = data;
-          this.showHide2 = false;
-          this.showHide1 = false;
-        });
+    if (this.SearchSchedule) {
+      if (this.SearchSchedule.trim().length >= 3) {
+        this.scheduleService
+          .searchBatchScheduleName(this.SearchSchedule.trim(), this.OrganizationID)
+          .subscribe((data: any[]) => {
+            this.scheduleList = data;
+            this.showHide2 = false;
+            this.showHide1 = false;
+          });
+      } else {
+        this.scheduleService
+          .getAllBatchScheduleNames(this.page, this.itemsPerPage, this.employeekey, this.OrganizationID)
+          .subscribe((data: any[]) => {
+            this.scheduleList = data;
+            if (this.scheduleList[0].totalItems > this.itemsPerPage) {
+              this.showHide2 = true;
+              this.showHide1 = false;
+            }
+            else if (this.scheduleList[0].totalItems <= this.itemsPerPage) {
+              this.showHide2 = false;
+              this.showHide1 = false;
+            }
+          });
+      }
     } else {
       this.scheduleService
         .getAllBatchScheduleNames(this.page, this.itemsPerPage, this.employeekey, this.OrganizationID)
@@ -106,7 +122,6 @@ export class SchedulingViewComponent implements OnInit {
           }
         });
     }
-
   }
 
   saveEmpChange(batchName, batchDesc, batchKey) {
@@ -218,7 +233,7 @@ export class SchedulingViewComponent implements OnInit {
   }
 
   deleteAssignmentName() {
-    this.loading=true;
+    this.loading = true;
     this.scheduleService.deleteAssignmentName(this.BatchScheduleNameKey, this.employeekey, this.OrganizationID)
       .subscribe((data: any[]) => {
         alert("Assignment Name deleted successfully");

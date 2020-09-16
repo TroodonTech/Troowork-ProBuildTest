@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 export class CreateDepartmentComponent implements OnInit {
   dept: Inventory[];
   createbuilding: FormGroup;
-
+  DepartmentName;
   role: String;
   name: String;
   employeekey: Number;

@@ -37,7 +37,7 @@ export class CreateWorkorderTypeComponent implements OnInit {
     }
     return window.atob(output);
   }
-
+  WorkOrderTypeName;MetricKey;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private WorkOrderServiceService: WorkOrderServiceService, private el: ElementRef) { }
 

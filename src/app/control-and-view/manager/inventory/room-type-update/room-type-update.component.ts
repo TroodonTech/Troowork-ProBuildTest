@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { InventoryService } from '../../../../service/inventory.service';
-import { Inventory } from '../../../../model-class/Inventory';
+// import { Inventory } from '../../../../model-class/Inventory';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Location } from '@angular/common';
 
@@ -12,10 +12,10 @@ import { Location } from '@angular/common';
 })
 export class RoomTypeUpdateComponent implements OnInit {
   rTypeKey$: Object;
-  metricTypeList: Inventory[];
+  metricTypeList;
   metricType: String;
   metricTypeKey: Number;
-  roomTypeList: Array<Inventory>;
+  roomTypeList;
   showField1: boolean = false;
   showField2: boolean = false;
   role: String;
@@ -99,7 +99,7 @@ export class RoomTypeUpdateComponent implements OnInit {
       RoomTypeName = RoomTypeName.trim();
       this.inventoryService
         .getMetricValues(this.OrganizationID)
-        .subscribe((data: Inventory[]) => {
+        .subscribe((data: any[]) => {
           this.metricTypeList = data;
           for (let i of this.metricTypeList) {
             if (i.MetricType === this.metricType) {
@@ -148,7 +148,7 @@ export class RoomTypeUpdateComponent implements OnInit {
 
     this.inventoryService
       .EditRoomtTypeAutoGenerate(this.rTypeKey$, this.OrganizationID)
-      .subscribe((data: Array<any>) => {
+      .subscribe((data: any[]) => {
         this.roomTypeList = data[0];
         this.roomtypeval = data[0].RoomTypeName;
         // this.MetricTypeValue = data[0].MetricTypeValue;
@@ -158,7 +158,7 @@ export class RoomTypeUpdateComponent implements OnInit {
         this.metricType1 = data[0].MetricType;
         this.inventoryService
           .getMetricValues(this.OrganizationID)
-          .subscribe((data: Inventory[]) => {
+          .subscribe((data: any[]) => {
             this.metricTypeList = data;
           });
       });

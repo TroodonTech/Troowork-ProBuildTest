@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { InventoryService } from '../../../../service/inventory.service';
-import { Inventory } from '../../../../model-class/Inventory';
+// import { Inventory } from '../../../../model-class/Inventory';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { Location } from '@angular/common';
@@ -13,14 +13,14 @@ import { Location } from '@angular/common';
 })
 export class EquipmentEditComponent implements OnInit {
   equipKey$: Object;
-  equipEditList: Inventory[];
+  equipEditList;
   FloorKey;
   FacKey: Number;
-  equipmentType: Inventory[];
-  buildings: Inventory[];
-  floors: Inventory[];
+  equipmentType;
+  buildings;
+  floors;
   equipTypeKey: Number;
-  dept: Inventory[];
+  dept;
   equipName;
   role: String;
   name: String;
@@ -54,7 +54,7 @@ export class EquipmentEditComponent implements OnInit {
     this.FloorKey = "";
     this.inventoryService
       .getallFloorList(facKey, this.OrganizationID)
-      .subscribe((data: Inventory[]) => {
+      .subscribe((data: any[]) => {
         this.floors = data;
       });
   }
@@ -85,10 +85,15 @@ export class EquipmentEditComponent implements OnInit {
       alert("Floor is not provided");
     } else {
       EquipmentName = EquipmentName.trim();
-      EquipmentDescription = EquipmentDescription.trim();
-      
+      if (!(EquipmentDescription) || !(EquipmentName.trim())) {
+        EquipmentDescription = EquipmentDescription;
+      }
+      else {
+        EquipmentDescription = EquipmentDescription.trim();
+      }
+
       if (this.equipName != EquipmentName) {
-        this.inventoryService.checkForNewEquipment(this.equipTypeKey, EquipmentName, this.employeekey, this.OrganizationID).subscribe((data: Inventory[]) => {
+        this.inventoryService.checkForNewEquipment(this.equipTypeKey, EquipmentName, this.employeekey, this.OrganizationID).subscribe((data: any[]) => {
           this.dept = data;
           if (this.dept[0].count > 0) {
             alert("Equipment already present");
@@ -125,28 +130,28 @@ export class EquipmentEditComponent implements OnInit {
 
     this.inventoryService
       .EditEquipmentAutoGenerate(this.equipKey$, this.OrganizationID)
-      .subscribe((data: Inventory[]) => {
-        this.equipEditList = data;
+      .subscribe((data: any[]) => {
+        this.equipEditList = data[0];
         this.equipName = data[0].EquipmentName;
         this.FacKey = data[0].FacilityKey;
         this.equipTypeKey = data[0].EquipmentTypeKey;
         console.log("...  facKey:" + this.FacKey);
         this.inventoryService
           .getallFloorList(data[0].FacilityKey, this.OrganizationID)
-          .subscribe((data: Inventory[]) => {
+          .subscribe((data: any[]) => {
             this.floors = data;
-            this.FloorKey = data[0].FloorKey;
+            if (data.length > 0) { this.FloorKey = data[0].FloorKey; }
           });
       });
     this.inventoryService
       .getAllEquipmentType(this.employeekey, this.OrganizationID)
-      .subscribe((data: Inventory[]) => {
+      .subscribe((data: any[]) => {
         this.equipmentType = data;
       });
 
     this.inventoryService
       .getallBuildingList(this.employeekey, this.OrganizationID)
-      .subscribe((data: Inventory[]) => {
+      .subscribe((data: any[]) => {
         this.buildings = data;
       });
 

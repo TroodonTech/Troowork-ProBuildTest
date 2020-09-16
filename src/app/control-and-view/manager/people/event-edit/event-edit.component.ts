@@ -11,7 +11,7 @@ import { PeopleServiceService } from '../../../../service/people-service.service
 export class EventEditComponent implements OnInit {
   actionKey$: Object;
   actionTypeKey$: Object;
-  dept: Array<any>;
+  dept;
   role: String;
   name: String;
   employeekey: Number;
@@ -60,7 +60,7 @@ export class EventEditComponent implements OnInit {
     this.employeekey = profile.employeekey;
     this.OrganizationID = profile.OrganizationID;
 
-    this.peopleServ.getEventTypeDetails(this.actionKey$, this.actionTypeKey$, this.employeekey, this.OrganizationID).subscribe((data: Array<any>) => {
+    this.peopleServ.getEventTypeDetails(this.actionKey$, this.actionTypeKey$, this.employeekey, this.OrganizationID).subscribe((data: any[]) => {
       this.dept = data[0];
     });
   }

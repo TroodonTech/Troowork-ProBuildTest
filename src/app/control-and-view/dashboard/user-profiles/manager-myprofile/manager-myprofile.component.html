@@ -1,7 +1,6 @@
- 
 <div class="container">
   <div class="container-fluid">
-   
+
     <div *ngFor="let profile of profile">
       <div style="margin-left: 50%;">
         <h4 class="refer"><strong>{{profile.FirstName}} {{profile.MiddleName}} {{profile.LastName}}
@@ -14,11 +13,11 @@
             <h4 class="refer"><strong>Employee</strong></h4>
           </div>
           <div *ngIf="profile.UserRoleName!=='Employee'"> -->
-            <h4 class="refer"><strong>{{profile.UserRoleName}}</strong></h4>
+          <h4 class="refer"><strong>{{profile.UserRoleName}}</strong></h4>
           <!-- </div> -->
         </div>
       </div>
-     
+
       <div class="form-group">
         <div>
           <section class="imageSection">
@@ -32,17 +31,19 @@
               <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
             </div>
             <div>
-            <!-- <div class="row col-md-12" style="margin-left: 45%"> -->
-                 
-              <button type="button" style="text-align:center" class="btn btn-success" [disabled]="fileCheck" (click)="ImgUpload();"><b>UPLOAD</b></button>
+              <!-- <div class="row col-md-12" style="margin-left: 45%"> -->
+
+              <button type="button" style="text-align:center;width: 18%;" class="btn btn-success" [disabled]="fileCheck"
+                (click)="ImgUpload();"><b>UPLOAD</b></button>
             </div>
             <div class='buttonDiv'>
-              <button style="margin-top: 1rem;width: 12rem;" class="btn btn-primary" [routerLink]="['changePasswordManager',profile.EmployeeKey,profile.UserRoleName,profile.IsSupervisor]"
+              <button style="margin-top: 1rem;width: 18%;" class="btn btn-primary"
+                [routerLink]="['changePasswordManager',profile.EmployeeKey,profile.UserRoleName,profile.IsSupervisor]"
                 routerLinkActive="active">
- 
+
                 <!-- ng-click="changePassword(,, )" -->
                 <span><b>CHANGE PASSWORD</b></span></button>
-              </div>
+            </div>
             <!-- </div> -->
           </section>
         </div>
@@ -70,10 +71,12 @@
                 <div>
                   <span class="col-md-6">Position:</span>
 
-                  <span style="margin-left: 8.2rem;" *ngIf="profile.IsSupervisor === 1 && profile.UserRoleName==='Employee'">
+                  <span style="margin-left: 8.2rem;"
+                    *ngIf="profile.IsSupervisor === 1 && profile.UserRoleName==='Employee'">
                     Supervisor
                   </span>
-                  <span style="margin-left: 8.2rem;" *ngIf="profile.IsSupervisor === 0 && profile.UserRoleName==='Employee'">
+                  <span style="margin-left: 8.2rem;"
+                    *ngIf="profile.IsSupervisor === 0 && profile.UserRoleName==='Employee'">
                     Employee
                   </span>
                   <span style="margin-left: 8.2rem;" *ngIf="profile.UserRoleName==='Manager'">

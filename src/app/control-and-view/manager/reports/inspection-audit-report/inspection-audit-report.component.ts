@@ -96,7 +96,7 @@ export class InspectionAuditReportComponent implements OnInit {
     this.showHide1 = false;
 
     this.inspectionService
-      .getTemplateNameForAuditReport(this.employeekey, this.OrganizationID)
+      .getTemplateName(this.employeekey, this.OrganizationID)
       .subscribe((data: any[]) => {
         this.templateNameList = data;
       });

@@ -107,7 +107,7 @@ export class CreateBatchWorkorderComponent implements OnInit {
   name: String;
   IsSupervisor: Number;
   employeekey;
-
+  rec1;
   //converting date from GMT to yyyy/mm/dd
   public convert_DT(str) {
     var date = new Date(str),
@@ -562,11 +562,27 @@ export class CreateBatchWorkorderComponent implements OnInit {
     if (this.RoomKey) {
       roomsString = this.RoomKey;
     } else {
+      // if (roomlistObj) {
+      //   for (var j = 0; j < roomlistObj.length; j++) {
+      //     roomList.push(roomlistObj[j].RoomKey);
+      //   }
+      //   roomsString = roomList.join(',');
+      // } else {
+      //   return;
+      // }
       if (roomlistObj) {
-        for (var j = 0; j < roomlistObj.length; j++) {
-          roomList.push(roomlistObj[j].RoomKey);
+        if (roomlistObj.length <= 100) {
+          for (var j = 0; j < roomlistObj.length; j++) {
+            roomList.push(roomlistObj[j].RoomKey);
+          }
+          roomsString = roomList.join(',');
+
         }
-        roomsString = roomList.join(',');
+        else {
+          alert("Limit for the maximum Batch workorders have reached. Maximum 100");
+          return;
+        }
+
       } else {
         return;
       }
@@ -1057,11 +1073,27 @@ export class CreateBatchWorkorderComponent implements OnInit {
     if (this.EquipmentKey) {
       this.eqp_key = this.EquipmentKey;
     } else {
+      // if (EquListObj) {
+      //   for (var j = 0; j < EquListObj.length; j++) {
+      //     equList.push(EquListObj[j].EquipmentKey);
+      //   }
+      //   this.eqp_key = equList.join(',');
+      // }
       if (EquListObj) {
-        for (var j = 0; j < EquListObj.length; j++) {
-          equList.push(EquListObj[j].EquipmentKey);
+        if (EquListObj.length <= 100) {
+          for (var j = 0; j < EquListObj.length; j++) {
+            equList.push(EquListObj[j].EquipmentKey);
+          }
+          this.eqp_key = equList.join(',');
+
         }
-        this.eqp_key = equList.join(',');
+        else{
+          alert("Limit for the maximum batch workorders have reached. Maximum 100");
+          return;
+        }
+
+      } else {
+        return;
       }
     }
     if (this.EmployeeKey) {

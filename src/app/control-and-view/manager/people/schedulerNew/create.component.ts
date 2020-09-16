@@ -26,7 +26,7 @@ import { ActivatedRoute, Router } from "@angular/router";
               </div>
          
               <label style="margin-top: 21%;">Date*</label>
-              <ng-datepicker [options]="options" position="top-right" [(ngModel)]="Date" (ngModelChange)="selecteddate()"></ng-datepicker><br><br>
+              <ng-datepicker [options]="options" position="top-right" [(ngModel)]="Date"></ng-datepicker><br><br>
           </div>
       </div>
       <button (click)='submit()'>submit</button>
@@ -177,7 +177,7 @@ export class CreateComponent implements OnInit {
       alert("Event has been Created !");
 
       // this.router.navigate(['/ManagerDashBoard', { outlets: { ManagerOut: ['Scheduler'] } }]);
-
+      this.ds.setExpandFlagNewComp(2);
       if (this.role == 'Manager') {
         this.router.navigate(['/ManagerDashBoard', { outlets: { ManagerOut: ['Scheduler'] } }]);
         // } else if (this.role == 'Employee' && this.IsSupervisor == 1) {

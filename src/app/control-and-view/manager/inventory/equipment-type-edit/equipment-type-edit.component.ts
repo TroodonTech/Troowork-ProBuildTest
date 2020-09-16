@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { InventoryService } from '../../../../service/inventory.service';
-import { Inventory } from '../../../../model-class/Inventory';
+// import { Inventory } from '../../../../model-class/Inventory';
 import { Location } from '@angular/common';
 
 @Component({
@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 })
 export class EquipmentTypeEditComponent implements OnInit {
   equipTypeKey$: Object;
-  equipType: Array<any>;
+  equipType;
 
   role: String;
   name: String;
@@ -82,7 +82,7 @@ export class EquipmentTypeEditComponent implements OnInit {
     this.employeekey = profile.employeekey;
     this.OrganizationID = profile.OrganizationID;
 
-    this.inventoryService.getEquipmentTypeListEdit(this.equipTypeKey$, this.OrganizationID).subscribe((data: Array<any>) => {
+    this.inventoryService.getEquipmentTypeListEdit(this.equipTypeKey$, this.OrganizationID).subscribe((data: any[]) => {
       console.log(this.equipTypeKey$);
 
       this.equipType = data[0];

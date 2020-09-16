@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { ManagerDashBoardComponent } from './manager-dash-board.component';
 
-import { ViewRemainingWorkordersDetailsModule } from "../../../manager/reports/view-remaining-workorders-details/view-remaining-workorders-details.module";
+import { ExpiredAssignmentsDetailsModule } from "../../../dashboard/manager-dashboard-pages/expired-assignments-details/expired-assignments-details.module";
+
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 const routes: Routes = [
@@ -717,8 +718,34 @@ const routes: Routes = [
         outlet: 'ManagerOut',
         loadChildren: '../../../manager/reports/view-remaining-workorders-details/view-remaining-workorders-details.module#ViewRemainingWorkordersDetailsModule'
 
-      }
+      },
+      {
+        path: 'picklistReport',
+        outlet: 'ManagerOut',
+        loadChildren: '../../../manager/reports/picklist-report/picklist-report.module#PicklistReportModule'
 
+      },
+      {
+        path: 'inspectionDetailReport',
+        outlet: 'ManagerOut',
+        loadChildren: '../../../manager/reports/inspection-detailed-report/inspection-detailed-report.module#InspectionDetailedReportModule'
+      },
+      {
+        path: 'GenerateQRCode/CleaningQRCodeView/:RoomKey',
+        outlet: 'ManagerOut',
+        loadChildren: '../../../manager/inventory/cleaning-qr-code-view/cleaning-qr-code-view.module#CleaningQrCodeViewModule'
+      },
+
+      {
+        path: 'welcomePage/expiryNearDetails',
+        outlet: 'ManagerOut',
+        loadChildren: '../../../dashboard/manager-dashboard-pages/expiring-assignments-details/expiring-assignments-details.module#ExpiringAssignmentsDetailsModule'
+      },
+      {
+        path: 'welcomePage/expiredDetails',
+        outlet: 'ManagerOut',
+        loadChildren: '../../../dashboard/manager-dashboard-pages/expired-assignments-details/expired-assignments-details.module#ExpiredAssignmentsDetailsModule'
+      },
     ]
   }
 ];

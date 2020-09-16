@@ -25,7 +25,7 @@ import { DatepickerOptions } from 'ng2-datepicker';
         <h3 style="text-align: right"></h3>
         <div class="form-group" style="width: 85%;">
           <label>View Range*</label>
-           <select [(ngModel)]="Range" (change)='ViewType();empCalendarActivities();' class="form-control col-sm-9 col-md-9 col-lg-9" [value]="value" style="background-color: #d4f4ff;">
+           <select [(ngModel)]="Range" (change)='ViewType();empCalendarActivities();' class="form-control col-sm-9 col-md-9 col-lg-9" style="background-color: #d4f4ff;">
            <!-- <option value="">--Select--</option> -->
               <!-- <option value="Daily">Daily</option>-->
               <option value="Week">Week</option>
@@ -49,6 +49,7 @@ import { DatepickerOptions } from 'ng2-datepicker';
             .header h1 a { text-decoration: none; }
             .header h1 { padding: 0px; margin: 0px; }
             .main { padding: 10px; margin-top: 10px; }
+            .bg-info { background-color: #FFFFFF !important; }
             
   `]
 })
@@ -119,7 +120,10 @@ export class ViewEmployeeSchedulerComponent implements AfterViewInit {
   config: any = {
     timeHeaders: [
       {
-        "groupBy": "Month"
+        "groupBy": "Month",
+      },
+      {
+        "groupBy": "Week",
       },
       {
         "groupBy": "Day",
@@ -141,10 +145,12 @@ export class ViewEmployeeSchedulerComponent implements AfterViewInit {
     treeEnabled: true,
     treePreventParentUsage: true,
     EventMovingStartEndEnabled: true,
-    bubble: new DayPilot.Bubble({
-      animation: "fast",
-      animated: false
-    }),
+    // bubble: new DayPilot.Bubble({
+    //   animation: "fast",
+    //   animated: false
+    // }),
+
+
     timeRangeSelectedHandling: 'Hold',
     onEventResize: args => {
       args.cell.disabled = true;
@@ -155,9 +161,14 @@ export class ViewEmployeeSchedulerComponent implements AfterViewInit {
       }
     },
     onBeforeTimeHeaderRender: args => {
+
+      if (args.header.level === 1) {
+        args.header.html = "Week " + args.header.html;
+      }
+
       var dayOfWeek = args.header.start.getDayOfWeek();
       if (dayOfWeek === 0 || dayOfWeek === 6) {
-        if (args.header.level > 0) {
+        if (args.header.level > 1) {
           args.header.backColor = "orange";
         }
       }
@@ -201,7 +212,7 @@ export class ViewEmployeeSchedulerComponent implements AfterViewInit {
 
       if (this.Range = 'Month') {
         TempEndDate = new Date(this.date);
-        var tempCurrDate= new Date(this.date);
+        var tempCurrDate = new Date(this.date);
         TempEndDate.setDate(TempEndDate.getDate() + new Date(tempCurrDate.getFullYear(), tempCurrDate.getMonth() + 1, 0).getDate());
       }
       else {
@@ -228,7 +239,7 @@ export class ViewEmployeeSchedulerComponent implements AfterViewInit {
               });
           }
           // else {
-           // alert("Please add employees in schedule Group !")
+          // alert("Please add employees in schedule Group !")
           // }
         });
 
@@ -238,7 +249,7 @@ export class ViewEmployeeSchedulerComponent implements AfterViewInit {
 
 
     // });
-    
+
 
 
   }
@@ -261,7 +272,10 @@ export class ViewEmployeeSchedulerComponent implements AfterViewInit {
     if (this.Range == 'Month') {
       this.config.timeHeaders = [
         {
-          "groupBy": "Month"
+          "groupBy": "Month",
+        },
+        {
+          "groupBy": "Week",
         },
         {
           "groupBy": "Day",
@@ -278,7 +292,7 @@ export class ViewEmployeeSchedulerComponent implements AfterViewInit {
       this.config.cellWidth = 150;
       this.config.days = DayPilot.Date.today().daysInMonth();
       if (this.date) {
-        this.config.startDate = this.date;
+        this.config.startDate = this.convert_DT(this.date);
       }
       else {
         this.config.startDate = DayPilot.Date.today();
@@ -287,6 +301,9 @@ export class ViewEmployeeSchedulerComponent implements AfterViewInit {
       this.config.timeHeaders = [
         {
           "groupBy": "Month"
+        },
+        {
+          "groupBy": "Week",
         },
         {
           "groupBy": "Day",
