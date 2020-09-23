@@ -1,5 +1,5 @@
 <div style="padding-left: 9%;padding-right: 9%;">
-  <div style="text-align:center" *ngIf="viewEmpInspectionDetails">
+  <div style="text-align:center">
     <h4 style="text-align:center">{{viewEmpInspectionDetails[0].TemplateName}}</h4>
     <h4>
       {{viewEmpInspectionDetails[0].FacilityName}}{{viewEmpInspectionDetails[0].FloorName}}{{viewEmpInspectionDetails[0].RoomId}}
@@ -117,7 +117,7 @@
         <div class="row col-md-12">
           <div class="col-md-6 ">
             <div class="form-group">
-              <a *ngFor="let x of  starList[i]; let j=index " style="padding: 2.5% 3.5%;" class='btn'
+              <a *ngFor="let x of  starList[i]; let j=index " class='btn'
                 (click)="setStar(i,j);saveRatings(item.TemplateQuestionID,item.ScoreName)">
                 <i *ngIf="x" class="fa fa-star-o"></i>
                 <i *ngIf="!x" class="fa fa-star"></i>
@@ -140,7 +140,7 @@
 
           <div class="col-md-6">
             <div class="form-group" style="visibility: hidden;">
-              <a *ngFor="let x of  starList[i]; let j=index " style="padding: 2.5% 3.5%;" class='btn'
+              <a *ngFor="let x of  starList[i]; let j=index " class='btn'
                 (click)="setStar(i,j);saveRatings(item.TemplateQuestionID,item.ScoreName)">
                 <i *ngIf="x" class="fa fa-star-o"></i>
                 <i *ngIf="!x" class="fa fa-star"></i>
@@ -173,7 +173,7 @@
         <div class="row col-md-12">
           <div class="col-md-6 ">
             <div class="form-group">
-              <a *ngFor="let x of starList[i]; let j=index " style="padding: 2.5% 3.5%;" class='btn'
+              <a *ngFor="let x of starList[i]; let j=index " class='btn'
                 (click)="setStar3(i,j);saveRatings(item.TemplateQuestionID,item.ScoreName)">
                 <i *ngIf="x" class="fa fa-star-o"></i>
                 <i *ngIf="!x" class="fa fa-star"></i>
@@ -195,7 +195,7 @@
 
           <div class="col-md-6">
             <div class="form-group" style="visibility: hidden;">
-              <a *ngFor="let x of starList[i]; let j=index " style="padding: 2.5% 3.5%;" class='btn'
+              <a *ngFor="let x of starList[i]; let j=index " class='btn'
                 (click)="setStar3(i,j);saveRatings(item.TemplateQuestionID,item.ScoreName)">
                 <i *ngIf="x" class="fa fa-star-o"></i>
                 <i *ngIf="!x" class="fa fa-star"></i>

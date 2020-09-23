@@ -27,7 +27,7 @@ import { ActivatedRoute, Router } from "@angular/router";
               </div>
          
               <label style="margin-top: 21%;">Date*</label>
-              <ng-datepicker [options]="options" position="top-right" [(ngModel)]="DateEdit"></ng-datepicker><br><br>
+              <ng-datepicker [options]="options" position="top-right" [(ngModel)]="DateEdit" (ngModelChange)="dateChangeNeeded()"></ng-datepicker><br><br>
           </div>
       </div>
       <button (click)='submitEdit()'>Submit</button>
@@ -131,6 +131,7 @@ export class EditComponent implements OnInit {
       day = ("0" + date.getDate()).slice(- 2);
     return [date.getFullYear(), mnth, day].join("-");
   };
+
   show(ev: DayPilot.Event) {
     console.log(ev.data);
     return new Promise((resolve) => {
@@ -159,10 +160,15 @@ export class EditComponent implements OnInit {
     });
   }
 
+  dateChangeNeeded() {
+    this.DateEdit = this.convert_DT(this.DateEdit);
+    console.log("dateChangeNeeded... " + this.DateEdit);
+  }
+  
   submitEdit() {
     // var currDate=new Date();
     // let data = this.form.getRawValue();
-    var date = this.convert_DT(this.DateEdit);
+    var date = this.DateEdit;
     if (!(this.BatchScheduleNameKeyEdit)) {
       alert("Please provide Assignment Name !");
       return;
