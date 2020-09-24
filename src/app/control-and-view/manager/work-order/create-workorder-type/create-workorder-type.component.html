@@ -11,7 +11,8 @@
         </label></h5>
       <div class="md-form col-md-8" style="text-align:left">
         <input type="text" placeholder="Work-Order Type Name" maxlength="40"
-          style="background-color: #D4F4FF !important;" class="form-control" [(ngModel)]="WorkOrderTypeName">
+          style="background-color: #D4F4FF !important;border-radius: 0.25rem;border: 1px solid #ced4da;"
+          class="form-control" [(ngModel)]="WorkOrderTypeName">
       </div>
     </div>
     <br>
@@ -41,7 +42,7 @@
 
     <div class="row col-md-12">
       <div class="col col-md-3"></div>
-      <div style="text-align:right"><button style="color:white !important" class="btn btn-success"
+      <div style="text-align:right;margin-left: 3%;"><button style="color:white !important" class="btn btn-success"
           (click)="addWOT(MetricKey,WorkOrderTypeName,MetricTypeValue)"><b>CREATE WORK-ORDER TYPE</b>
         </button></div>
       <div style="text-align:left">
