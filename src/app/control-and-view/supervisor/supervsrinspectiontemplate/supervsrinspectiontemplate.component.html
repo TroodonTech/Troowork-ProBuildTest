@@ -117,7 +117,7 @@
         <div class="row col-md-12">
           <div class="col-md-6 ">
             <div class="form-group">
-              <a *ngFor="let x of  starList[i]; let j=index " class='btn'
+              <a *ngFor="let x of  starList[i]; let j=index " class='btn' style="padding: 4%;"
                 (click)="setStar(i,j);saveRatings(item.TemplateQuestionID,item.ScoreName)">
                 <i *ngIf="x" class="fa fa-star-o"></i>
                 <i *ngIf="!x" class="fa fa-star"></i>
@@ -140,7 +140,7 @@
 
           <div class="col-md-6">
             <div class="form-group" style="visibility: hidden;">
-              <a *ngFor="let x of  starList[i]; let j=index " class='btn'
+              <a *ngFor="let x of  starList[i]; let j=index " class='btn' style="padding: 4%;"
                 (click)="setStar(i,j);saveRatings(item.TemplateQuestionID,item.ScoreName)">
                 <i *ngIf="x" class="fa fa-star-o"></i>
                 <i *ngIf="!x" class="fa fa-star"></i>
@@ -173,7 +173,7 @@
         <div class="row col-md-12">
           <div class="col-md-6 ">
             <div class="form-group">
-              <a *ngFor="let x of starList[i]; let j=index " class='btn'
+              <a *ngFor="let x of starList[i]; let j=index " class='btn' style="padding: 4%;"
                 (click)="setStar3(i,j);saveRatings(item.TemplateQuestionID,item.ScoreName)">
                 <i *ngIf="x" class="fa fa-star-o"></i>
                 <i *ngIf="!x" class="fa fa-star"></i>
@@ -195,7 +195,7 @@
 
           <div class="col-md-6">
             <div class="form-group" style="visibility: hidden;">
-              <a *ngFor="let x of starList[i]; let j=index " class='btn'
+              <a *ngFor="let x of starList[i]; let j=index " class='btn' style="padding: 4%;"
                 (click)="setStar3(i,j);saveRatings(item.TemplateQuestionID,item.ScoreName)">
                 <i *ngIf="x" class="fa fa-star-o"></i>
                 <i *ngIf="!x" class="fa fa-star"></i>
