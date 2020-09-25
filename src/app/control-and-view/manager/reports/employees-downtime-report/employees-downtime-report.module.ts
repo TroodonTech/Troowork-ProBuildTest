@@ -9,7 +9,7 @@ import { NgDatepickerModule } from 'ng2-datepicker';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { EmployeesDowntimeReportComponent } from './employees-downtime-report.component';
 import { ManagerDashBoardModule } from '../../../dashboard/user-dashboards/manager-dash-board/manager-dash-board.module';
-import { ChartsModule } from 'ng2-charts';
+// import { ChartsModule } from 'ng2-charts';
 const routes: Routes = [
   {
     path: '',
@@ -29,7 +29,7 @@ const routes: Routes = [
     NgDatepickerModule,
     NgMultiSelectDropDownModule.forRoot(),
     RouterModule.forChild(routes),
-    ChartsModule
+    // ChartsModule
   ],
   declarations: [EmployeesDowntimeReportComponent]
 })

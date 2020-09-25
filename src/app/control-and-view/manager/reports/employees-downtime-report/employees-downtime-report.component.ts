@@ -7,7 +7,7 @@ import { ChartOptions } from 'chart.js';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 import 'jspdf-autotable';
-import { ChartsModule } from 'ng2-charts';
+// import { ChartsModule } from 'ng2-charts';
 // import 'chartjs-plugin-datalabels'
 
 @Component({
