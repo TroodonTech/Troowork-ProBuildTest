@@ -15606,7 +15606,7 @@ let imgstorage1 = multer.diskStorage({
         });
 
 
-        // console.log(file.name);
+        console.log(file.name);
 
         cb(null, file.originalname);
     }
@@ -19350,7 +19350,7 @@ app.get(securedpath + '/employeesForScheduler_SuType', function (req, res) {
 
                     if (OrganizationID == 103) {
                         for (var j = 0; j <= arr; j++) {// inserting array value to scheduler tree list
-                            resources.push({ name: tempArr[j][0].Description, id: tempArr[j][0].Idemployeegrouping, "expanded": true, children: tempArr[j], IsShift: 1, backColor: tempArr[j][0].backColor });
+                            resources.push({ name: tempArr[j][0].Description, id: tempArr[j][0].Idemployeegrouping, "expanded": false, children: tempArr[j], IsShift: 1, backColor: tempArr[j][0].backColor });
 
                         }
                     } else {
@@ -21556,7 +21556,7 @@ app.get(securedpath + '/employeesrowFiltering', function (req, res) {
                     if (tempArr.length > 0) {
                         if (OrganizationID == 103) {
                             for (var j = 0; j <= arr; j++) {// inserting array value to scheduler tree list
-                                resources.push({ name: tempArr[j][0].Description, id: tempArr[j][0].Idemployeegrouping, "expanded": true, children: tempArr[j], IsShift: 1, backColor: tempArr[j][0].backColor });
+                                resources.push({ name: tempArr[j][0].Description, id: tempArr[j][0].Idemployeegrouping, "expanded": false, children: tempArr[j], IsShift: 1, backColor: tempArr[j][0].backColor });
 
                             }
                         } else {
@@ -21603,6 +21603,41 @@ app.get(securedpath + '/getSupervisorInspectionView_WEB', function (req, res) {
 
 });
 //Rodney Code change Ends here
+//
+app.options('/mobsaveinspectedQuestions', supportCrossOriginScript);
+app.post(securedpath + '/mobsaveinspectedQuestions', supportCrossOriginScript, function (req, res) {
+    var inspectionnotes = req.body.inspectionnotes;
+    var templateQstnValues = req.body.templateQstnValues;
+    var templateid = req.body.templateid;
+    var inspectionkey = req.body.inspectionkey;
+    var questionid = req.body.questionid;
+    var metaupdatedby = req.body.employeekey;
+    var OrganizationID = req.body.OrganizationID;
+
+    var ObservationDeficiency = req.body.ObservationDeficiency;
+    var CorrectiveAction = req.body.CorrectiveAction;
+    var CompletedDate = req.body.CompletedDate;
+
+    pool.getConnection(function (err, connection) {
+        if (err) {
+
+            console.log("Failed! Connection with Database spicnspan via connection pool failed");
+        }
+        else {
+            console.log("Success! Connection with Database spicnspan via connection pool succeeded");
+            connection.query('set @inspectionnotes=?; set @templateQstnValues=?; set @templateid=?; set @inspectionkey=?; set @questionid=?; set @metaupdatedby=?; set @OrganizationID=?; set @ObservationDeficiency=?; set @CorrectiveAction=?; set @CompletedDate=?;call usp_mob_saveInspectedValues(@inspectionnotes,@templateQstnValues,@templateid,@inspectionkey,@questionid,@metaupdatedby,@OrganizationID,@ObservationDeficiency,@CorrectiveAction,@CompletedDate)', [inspectionnotes, templateQstnValues, templateid, inspectionkey, questionid, metaupdatedby, OrganizationID, ObservationDeficiency, CorrectiveAction, CompletedDate], function (err, rows) {
+                if (err) {
+                    console.log("Problem with MySQL" + err);
+                }
+                else {
+                    res.end(JSON.stringify(rows[10]));
+                }
+            });
+        }
+        connection.release();
+    });
+});
+//
 //handle generic exceptions
 //catch all other resource routes that are not defined above
 app.get(securedpath + '/*', function (req, res) {
