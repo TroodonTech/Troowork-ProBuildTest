@@ -20,7 +20,7 @@ import { DatepickerOptions } from 'ng2-datepicker';
     <div class="row col-md-12 ">
         <h4 style="margin-left: 42%;margin-bottom:4%">EMPLOYEE SCHEDULER</h4>
     </div>
-    <div style="margin-left: 1.5rem;margin-right: 1.5rem;padding-bottom: 1rem;padding-top: 1rem"
+    <div style="margin-left: 1.5rem;margin-right: 1.5rem;padding-bottom: 1rem;padding-top: 3%"
         class="row bg-info col-md-12">
         <div class="col-md-6">
             <h3 style="text-align: right"></h3>

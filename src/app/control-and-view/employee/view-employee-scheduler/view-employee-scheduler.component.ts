@@ -8,7 +8,7 @@ import { DatepickerOptions } from 'ng2-datepicker';
 @Component({
   selector: 'scheduler-component',
   template: `
-  <div style="padding-left: 9rem;padding-right: 9rem;margin-top: 3%;margin-bottom: 3%;">
+  <div style="padding-left: 9rem;padding-right: 9rem;margin-top: 6%;margin-bottom: 3%;">
     <div class="row col-md-12 ">
       <h4 style="margin-left: 42%;margin-bottom:4%">EMPLOYEE SCHEDULER</h4>
     </div>
