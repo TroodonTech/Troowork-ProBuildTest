@@ -191,7 +191,7 @@ export class EditComponent implements OnInit {
     // this.SchedulingService.SchedulerTimeRangeCheck(this.BatchScheduleNameKeyEdit, this.convert_DT(this.event.data.start), this.event.data.resource, this.OrganizationID).subscribe(data => {
     //   if (data[0].count > 0) {
     this.SchedulingService.SchedulerEventUpdate(obj).subscribe(data => {
-      alert("Event has been Updated !");
+      // alert("Event has been Updated !");
       this.ds.setExpandFlagNewComp(3);
       // this.router.navigate(['/ManagerDashBoard', { outlets: { ManagerOut: ['Scheduler'] } }]);
       if (this.role == 'Manager') {
@@ -255,7 +255,7 @@ export class EditComponent implements OnInit {
     var confirmBox = confirm("Do you want to Delete ?");
     if (confirmBox == true) {
       this.SchedulingService.SchedulerEventDelete(this.AssignIDForDelete, this.employeekey, this.OrganizationID).subscribe(data => {
-        alert("Sucessfully Deleted !");
+        // alert("Sucessfully Deleted !");
         this.ds.setExpandFlagNewComp(3);
         // this.router.navigate(['/ManagerDashBoard', { outlets: { ManagerOut: ['Scheduler'] } }]);
         if (this.role == 'Manager') {

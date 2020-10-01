@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReviewService } from '../../service/review.service';
+import { InventoryService } from '../../service/inventory.service';
 import { ActivatedRoute, Router } from "@angular/router";
 @Component({
   selector: 'app-user-work-request',
@@ -10,13 +11,14 @@ export class UserWorkRequestComponent implements OnInit {
   OrgId$;
   rKey$;
   comments;
-  Facility_Key;
-  Floor_Key;
-  Zone_Key;
-  constructor(private reviewservice: ReviewService, private router: Router, private route: ActivatedRoute) {
-    this.route.params.subscribe(params => this.Facility_Key = params.Facility_Key);
-    this.route.params.subscribe(params => this.Floor_Key = params.Floor_Key);
-    this.route.params.subscribe(params => this.Zone_Key = params.Zone_Key);
+  roomdetails;
+  // Facility_Key;
+  // Floor_Key;
+  // Zone_Key;
+  constructor(private reviewservice: ReviewService, private inventoryService: InventoryService, private router: Router, private route: ActivatedRoute) {
+    // this.route.params.subscribe(params => this.Facility_Key = params.Facility_Key);
+    // this.route.params.subscribe(params => this.Floor_Key = params.Floor_Key);
+    // this.route.params.subscribe(params => this.Zone_Key = params.Zone_Key);
     this.route.params.subscribe(params => this.OrgId$ = params.rev_orgid);
     this.route.params.subscribe(params => this.rKey$ = params.room_key);
   }
@@ -27,6 +29,12 @@ export class UserWorkRequestComponent implements OnInit {
     return [date.getFullYear(), mnth, day].join("-");
   };
   ngOnInit() {
+
+    this.inventoryService.getRoomDetailsList(this.rKey$, this.OrgId$).subscribe((data) => {
+      this.roomdetails = data[0];
+
+    });
+
   }
   Submit() {
     if (!(this.comments) || !(this.comments.trim())) {
@@ -48,9 +56,9 @@ export class UserWorkRequestComponent implements OnInit {
     p = today_DT + " " + h + ":" + mi + ":" + s;
     this.comments = this.comments.trim();
     let reviewAdd = {
-      Facility_Key: this.Facility_Key,
-      Floor_Key: this.Floor_Key,
-      Zone_Key: this.Zone_Key,
+      Facility_Key: this.roomdetails.FacilityKey,
+      Floor_Key: this.roomdetails.FloorKey,
+      Zone_Key: this.roomdetails.ZoneKey,
       Orgid: this.OrgId$,
       roomKey: this.rKey$,
       Comments: this.comments,

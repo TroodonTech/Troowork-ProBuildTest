@@ -174,7 +174,7 @@ export class CreateComponent implements OnInit {
 
     //     if (data[0].count == 0) {
     this.SchedulingService.SchedulerEventCreate(obj).subscribe(data => {
-      alert("Event has been Created !");
+      // alert("Event has been Created !");
 
       // this.router.navigate(['/ManagerDashBoard', { outlets: { ManagerOut: ['Scheduler'] } }]);
       this.ds.setExpandFlagNewComp(2);

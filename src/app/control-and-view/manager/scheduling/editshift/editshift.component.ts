@@ -34,6 +34,16 @@ export class EditshiftComponent implements OnInit {
   masterhour: People[];
   masterminute: People[];
 
+  showHide;
+
+  start_hour: String;
+  start_min: String;
+  start_format: String;
+  end_hour: String;
+  end_min: String;
+  end_format: String;
+
+
   url_base64_decode(str) {
     var output = str.replace('-', '+').replace('_', '/');
     switch (output.length % 4) {
@@ -67,6 +77,12 @@ export class EditshiftComponent implements OnInit {
     this.employeekey = profile.employeekey;
     this.OrganizationID = profile.OrganizationID;
 
+    if (this.OrganizationID == 223 || this.OrganizationID == 134) {
+      this.showHide = true;
+    } else {
+      this.showHide = false;
+    }
+
     this.isemployeecalendar = profile.isemployeecalendar;
     //token ends
     this.PeopleServiceService
@@ -87,7 +103,6 @@ export class EditshiftComponent implements OnInit {
       });
     this.scheduleServ.getShiftsforEditing(this.shiftk$, this.OrganizationID).subscribe((data: any[]) => {
       this.edit = data[0];
-
       // var cur_time = new Date(Date.now());
       // var timeValue1 = this.edit.StartTime;
       // var timeValue2 = this.edit.EndTime;
@@ -106,132 +121,144 @@ export class EditshiftComponent implements OnInit {
       else {
         this.Idscheduler_exception = this.edit.Idscheduler_exception;
       }
-      console.log(this.Idscheduler_exception + "*****")
-      if (!(this.edit.Start_sun_hour)) {
-        this.edit.Start_sun_hour = '-1';
-      }
-      if (!(this.edit.Start_sun_min)) {
-        this.edit.Start_sun_min = '-1';
-      }
-      if (!(this.edit.Start_sun_format)) {
-        this.edit.Start_sun_format = 'AM';
-      }
-      if (!(this.edit.Start_mon_hour)) {
-        this.edit.Start_mon_hour = '-1';
-      }
-      if (!(this.edit.Start_mon_min)) {
-        this.edit.Start_mon_min = '-1';
-      }
-      if (!(this.edit.Start_mon_format)) {
-        this.edit.Start_mon_format = 'AM';
-      }
-      if (!(this.edit.Start_tue_hour)) {
-        this.edit.Start_tue_hour = '-1';
-      }
-      if (!(this.edit.Start_tue_min)) {
-        this.edit.Start_tue_min = '-1';
-      }
-      if (!(this.edit.Start_tue_format)) {
-        this.edit.Start_tue_format = 'AM';
-      }
-      if (!(this.edit.Start_wed_hour)) {
-        this.edit.Start_wed_hour = '-1';
-      }
-      if (!(this.edit.Start_wed_min)) {
-        this.edit.Start_wed_min = '-1';
-      }
-      if (!(this.edit.Start_wed_format)) {
-        this.edit.Start_wed_format = 'AM';
-      }
-      if (!(this.edit.Start_thu_hour)) {
-        this.edit.Start_thu_hour = '-1';
-      }
-      if (!(this.edit.Start_thu_min)) {
-        this.edit.Start_thu_min = '-1';
-      }
-      if (!(this.edit.Start_thu_format)) {
-        this.edit.Start_thu_format = 'AM';
-      }
-      if (!(this.edit.Start_fri_hour)) {
-        this.edit.Start_fri_hour = '-1';
-      }
-      if (!(this.edit.Start_fri_min)) {
-        this.edit.Start_fri_min = '-1';
-      }
-      if (!(this.edit.Start_fri_format)) {
-        this.edit.Start_fri_format = 'AM';
-      }
-      if (!(this.edit.Start_sat_hour)) {
-        this.edit.Start_sat_hour = '-1';
-      }
-      if (!(this.edit.Start_sat_min)) {
-        this.edit.Start_sat_min = '-1';
-      }
-      if (!(this.edit.Start_sat_format)) {
-        this.edit.start_sat_format = 'AM';
-      }
-      if (!(this.edit.End_sun_hour)) {
-        this.edit.End_sun_hour = '-1';
-      }
-      if (!(this.edit.End_sun_min)) {
-        this.edit.End_sun_min = '-1';
-      }
-      if (!(this.edit.End_sun_format)) {
-        this.edit.End_sun_format = 'AM';
-      }
-      if (!(this.edit.End_mon_hour)) {
-        this.edit.End_mon_hour = '-1';
-      }
-      if (!(this.edit.End_mon_min)) {
-        this.edit.End_mon_min = '-1';
-      }
-      if (!(this.edit.End_mon_format)) {
-        this.edit.End_mon_format = 'AM';
-      }
-      if (!(this.edit.End_tue_hour)) {
-        this.edit.End_tue_hour = '-1';
-      }
-      if (!(this.edit.End_tue_min)) {
-        this.edit.End_tue_min = '-1';
-      }
-      if (!(this.edit.End_tue_format)) {
-        this.edit.End_tue_format = 'AM';
-      }
-      if (!(this.edit.End_wed_hour)) {
-        this.edit.End_wed_hour = '-1';
-      }
-      if (!(this.edit.End_wed_min)) {
-        this.edit.End_wed_min = '-1';
-      }
-      if (!(this.edit.End_wed_format)) {
-        this.edit.End_wed_format = 'AM';
-      }
-      if (!(this.edit.End_thu_hour)) {
-        this.edit.End_thu_hour = '-1';
-      }
-      if (!(this.edit.End_thu_min)) {
-        this.edit.End_thu_min = '-1';
-      }
-      if (!(this.edit.End_thu_format)) {
-        this.edit.End_thu_format = 'AM';
-      }
-      if (!(this.edit.End_fri_hour)) {
-        this.edit.End_fri_hour = '-1';
-      }
-      if (!(this.edit.End_fri_min)) {
-        this.edit.End_fri_min = '-1';
-      }
-      if (!(this.edit.End_fri_format)) {
-        this.edit.End_fri_format = 'AM';
-      }
-      if (!(this.edit.End_sat_hour)) {
-        this.edit.End_sat_hour = '-1';
-      }
-      if (!(this.edit.End_sat_min)) {
-        this.edit.End_sat_min = '-1';
-      }
-      if (!(this.edit.End_sat_format)) {
-        this.edit.End_sat_format = 'AM';
+      // console.log(this.Idscheduler_exception + "*****")
+      if (this.showHide == true) {
+        if (!(this.edit.Start_sun_hour)) {
+          this.edit.Start_sun_hour = '-1';
+        }
+        if (!(this.edit.Start_sun_min)) {
+          this.edit.Start_sun_min = '-1';
+        }
+        if (!(this.edit.Start_sun_format)) {
+          this.edit.Start_sun_format = 'AM';
+        }
+        if (!(this.edit.Start_mon_hour)) {
+          this.edit.Start_mon_hour = '-1';
+        }
+        if (!(this.edit.Start_mon_min)) {
+          this.edit.Start_mon_min = '-1';
+        }
+        if (!(this.edit.Start_mon_format)) {
+          this.edit.Start_mon_format = 'AM';
+        }
+        if (!(this.edit.Start_tue_hour)) {
+          this.edit.Start_tue_hour = '-1';
+        }
+        if (!(this.edit.Start_tue_min)) {
+          this.edit.Start_tue_min = '-1';
+        }
+        if (!(this.edit.Start_tue_format)) {
+          this.edit.Start_tue_format = 'AM';
+        }
+        if (!(this.edit.Start_wed_hour)) {
+          this.edit.Start_wed_hour = '-1';
+        }
+        if (!(this.edit.Start_wed_min)) {
+          this.edit.Start_wed_min = '-1';
+        }
+        if (!(this.edit.Start_wed_format)) {
+          this.edit.Start_wed_format = 'AM';
+        }
+        if (!(this.edit.Start_thu_hour)) {
+          this.edit.Start_thu_hour = '-1';
+        }
+        if (!(this.edit.Start_thu_min)) {
+          this.edit.Start_thu_min = '-1';
+        }
+        if (!(this.edit.Start_thu_format)) {
+          this.edit.Start_thu_format = 'AM';
+        }
+        if (!(this.edit.Start_fri_hour)) {
+          this.edit.Start_fri_hour = '-1';
+        }
+        if (!(this.edit.Start_fri_min)) {
+          this.edit.Start_fri_min = '-1';
+        }
+        if (!(this.edit.Start_fri_format)) {
+          this.edit.Start_fri_format = 'AM';
+        }
+        if (!(this.edit.Start_sat_hour)) {
+          this.edit.Start_sat_hour = '-1';
+        }
+        if (!(this.edit.Start_sat_min)) {
+          this.edit.Start_sat_min = '-1';
+        }
+        if (!(this.edit.Start_sat_format)) {
+          this.edit.start_sat_format = 'AM';
+        }
+        if (!(this.edit.End_sun_hour)) {
+          this.edit.End_sun_hour = '-1';
+        }
+        if (!(this.edit.End_sun_min)) {
+          this.edit.End_sun_min = '-1';
+        }
+        if (!(this.edit.End_sun_format)) {
+          this.edit.End_sun_format = 'AM';
+        }
+        if (!(this.edit.End_mon_hour)) {
+          this.edit.End_mon_hour = '-1';
+        }
+        if (!(this.edit.End_mon_min)) {
+          this.edit.End_mon_min = '-1';
+        }
+        if (!(this.edit.End_mon_format)) {
+          this.edit.End_mon_format = 'AM';
+        }
+        if (!(this.edit.End_tue_hour)) {
+          this.edit.End_tue_hour = '-1';
+        }
+        if (!(this.edit.End_tue_min)) {
+          this.edit.End_tue_min = '-1';
+        }
+        if (!(this.edit.End_tue_format)) {
+          this.edit.End_tue_format = 'AM';
+        }
+        if (!(this.edit.End_wed_hour)) {
+          this.edit.End_wed_hour = '-1';
+        }
+        if (!(this.edit.End_wed_min)) {
+          this.edit.End_wed_min = '-1';
+        }
+        if (!(this.edit.End_wed_format)) {
+          this.edit.End_wed_format = 'AM';
+        }
+        if (!(this.edit.End_thu_hour)) {
+          this.edit.End_thu_hour = '-1';
+        }
+        if (!(this.edit.End_thu_min)) {
+          this.edit.End_thu_min = '-1';
+        }
+        if (!(this.edit.End_thu_format)) {
+          this.edit.End_thu_format = 'AM';
+        }
+        if (!(this.edit.End_fri_hour)) {
+          this.edit.End_fri_hour = '-1';
+        }
+        if (!(this.edit.End_fri_min)) {
+          this.edit.End_fri_min = '-1';
+        }
+        if (!(this.edit.End_fri_format)) {
+          this.edit.End_fri_format = 'AM';
+        }
+        if (!(this.edit.End_sat_hour)) {
+          this.edit.End_sat_hour = '-1';
+        }
+        if (!(this.edit.End_sat_min)) {
+          this.edit.End_sat_min = '-1';
+        }
+        if (!(this.edit.End_sat_format)) {
+          this.edit.End_sat_format = 'AM';
+        }
+      } else if (this.showHide == false) {
+
+        this.start_hour = this.edit.Start_sun_hour;
+        this.start_min = this.edit.Start_sun_min;
+        this.start_format = this.edit.Start_sun_format;
+        this.end_hour = this.edit.End_sun_hour;
+        this.end_min = this.edit.End_sun_min;
+        this.end_format = this.edit.End_sun_format;
+
+        console.log(this.start_format + "  " + this.end_format);
       }
       // scheduler code ends...
     });
@@ -248,95 +275,163 @@ export class EditshiftComponent implements OnInit {
       alert("Please select a colour");
       return;
     }
-    if (this.edit.Start_sun_hour == '-1' && this.edit.Start_sun_min == '-1' && this.edit.End_sun_hour == '-1' && this.edit.End_sun_min == '-1') {
-      this.schedularcount = this.schedularcount;
+    if (this.showHide == true) {
+      if (this.edit.Start_sun_hour == '-1' && this.edit.Start_sun_min == '-1' && this.edit.End_sun_hour == '-1' && this.edit.End_sun_min == '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else if (this.edit.Start_sun_hour != '-1' && this.edit.Start_sun_min != '-1' && this.edit.End_sun_hour != '-1' && this.edit.End_sun_min != '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else {
+        this.schedularcount++;
+        console.log("sun... " + this.schedularcount);
+        alert('Values Missing in Sunday');
+        return;
+      }
+
+      if (this.edit.Start_mon_hour == '-1' && this.edit.Start_mon_min == '-1' && this.edit.End_mon_hour == '-1' && this.edit.End_mon_min == '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else if (this.edit.Start_mon_hour != '-1' && this.edit.Start_mon_min != '-1' && this.edit.End_mon_hour != '-1' && this.edit.End_mon_min != '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else {
+        this.schedularcount++;
+        console.log("mon... " + this.schedularcount);
+        alert('Values Missing in Monday');
+        return;
+      }
+
+      if (this.edit.Start_tue_hour == '-1' && this.edit.Start_tue_min == '-1' && this.edit.End_tue_hour == '-1' && this.edit.End_tue_min == '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else if (this.edit.Start_tue_hour != '-1' && this.edit.Start_tue_min != '-1' && this.edit.End_tue_hour != '-1' && this.edit.End_tue_min != '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else {
+        this.schedularcount++;
+        console.log("tue... " + this.schedularcount);
+        alert('Values Missing in Tuesday');
+        return;
+      }
+
+      if (this.edit.Start_wed_hour == '-1' && this.edit.Start_wed_min == '-1' && this.edit.End_wed_hour == '-1' && this.edit.End_wed_min == '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else if (this.edit.Start_wed_hour != '-1' && this.edit.Start_wed_min != '-1' && this.edit.End_wed_hour != '-1' && this.edit.End_wed_min != '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else {
+        this.schedularcount++;
+        console.log("wed... " + this.schedularcount);
+        alert('Values Missing in Wednesday');
+        return;
+      }
+
+      if (this.edit.Start_thu_hour == '-1' && this.edit.Start_thu_min == '-1' && this.edit.End_thu_hour == '-1' && this.edit.End_thu_min == '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else if (this.edit.Start_thu_hour != '-1' && this.edit.Start_thu_min != '-1' && this.edit.End_thu_hour != '-1' && this.edit.End_thu_min != '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else {
+        this.schedularcount++;
+        console.log("thu... " + this.schedularcount);
+        alert('Values Missing in Thursday');
+        return;
+      }
+
+      if (this.edit.Start_fri_hour == '-1' && this.edit.Start_fri_min == '-1' && this.edit.End_fri_hour == '-1' && this.edit.End_fri_min == '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else if (this.edit.Start_fri_hour != '-1' && this.edit.Start_fri_min != '-1' && this.edit.End_fri_hour != '-1' && this.edit.End_fri_min != '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else {
+        this.schedularcount++;
+        console.log("fri... " + this.schedularcount);
+        alert('Values Missing in Friday');
+        return;
+      }
+
+      if (this.edit.Start_sat_hour == '-1' && this.edit.Start_sat_min == '-1' && this.edit.End_sat_hour == '-1' && this.edit.End_sat_min == '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else if (this.edit.Start_sat_hour != '-1' && this.edit.Start_sat_min != '-1' && this.edit.End_sat_hour != '-1' && this.edit.End_sat_min != '-1') {
+        this.schedularcount = this.schedularcount;
+      } else {
+        this.schedularcount++;
+        console.log("sat... " + this.schedularcount);
+        alert('Values Missing in Saturday');
+        return;
+      }
     }
-    else if (this.edit.Start_sun_hour != '-1' && this.edit.Start_sun_min != '-1' && this.edit.End_sun_hour != '-1' && this.edit.End_sun_min != '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else {
-      this.schedularcount++;
-      console.log("sun... " + this.schedularcount);
-      alert('Values Missing in Sunday');
-      return;
+    else if (this.showHide == false) {
+      console.log(this.start_format + "  " + this.end_format);
+      if (this.start_hour == '-1' || this.start_min == '-1' || this.end_hour == '-1' || this.end_min == '-1') {
+        this.schedularcount++;
+        alert('Values Missing in Start and End Time');
+        return;
+      } else {
+        this.edit.Start_sun_hour = this.start_hour;
+        this.edit.Start_sun_min = this.start_min;
+        this.edit.Start_sun_format = this.start_format;
+
+        this.edit.Start_mon_hour = this.start_hour;
+        this.edit.Start_mon_min = this.start_min;
+        this.edit.Start_mon_format = this.start_format;
+
+        this.edit.Start_tue_hour = this.start_hour;
+        this.edit.start_tue_min = this.start_min;
+        this.edit.start_tue_format = this.start_format;
+
+        this.edit.Start_wed_hour = this.start_hour;
+        this.edit.Start_wed_min = this.start_min;
+        this.edit.Start_wed_format = this.start_format;
+
+        this.edit.Start_thu_hour = this.start_hour;
+        this.edit.Start_thu_min = this.start_min;
+        this.edit.Start_thu_format = this.start_format;
+
+        this.edit.Start_fri_hour = this.start_hour;
+        this.edit.Start_fri_min = this.start_min;
+        this.edit.Start_fri_format = this.start_format;
+
+        this.edit.Start_sat_hour = this.start_hour;
+        this.edit.Start_sat_min = this.start_min;
+        this.edit.Start_sat_format = this.start_format;
+
+        this.edit.End_sun_hour = this.end_hour;
+        this.edit.End_sun_min = this.end_min;
+        this.edit.End_sun_format = this.end_format;
+
+        this.edit.End_mon_hour = this.end_hour;
+        this.edit.End_mon_min = this.end_min;
+        this.edit.End_mon_format = this.end_format;
+
+        this.edit.End_tue_hour = this.end_hour;
+        this.edit.End_tue_min = this.end_min;
+        this.edit.End_tue_format = this.end_format;
+
+        this.edit.End_wed_hour = this.end_hour;
+        this.edit.End_wed_min = this.end_min;
+        this.edit.End_wed_format = this.end_format;
+
+        this.edit.End_thu_hour = this.end_hour;
+        this.edit.End_thu_min = this.end_min;
+        this.edit.End_thu_format = this.end_format;
+
+        this.edit.End_fri_hour = this.end_hour;
+        this.edit.End_fri_min = this.end_min;
+        this.edit.End_fri_format = this.end_format;
+
+        this.edit.End_sat_hour = this.end_hour;
+        this.edit.End_sat_min = this.end_min;
+        this.edit.End_sat_format = this.end_format;
+      }
+
     }
 
-    if (this.edit.Start_mon_hour == '-1' && this.edit.Start_mon_min == '-1' && this.edit.End_mon_hour == '-1' && this.edit.End_mon_min == '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else if (this.edit.Start_mon_hour != '-1' && this.edit.Start_mon_min != '-1' && this.edit.End_mon_hour != '-1' && this.edit.End_mon_min != '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else {
-      this.schedularcount++;
-      console.log("mon... " + this.schedularcount);
-      alert('Values Missing in Monday');
-      return;
-    }
-
-    if (this.edit.Start_tue_hour == '-1' && this.edit.Start_tue_min == '-1' && this.edit.End_tue_hour == '-1' && this.edit.End_tue_min == '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else if (this.edit.Start_tue_hour != '-1' && this.edit.Start_tue_min != '-1' && this.edit.End_tue_hour != '-1' && this.edit.End_tue_min != '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else {
-      this.schedularcount++;
-      console.log("tue... " + this.schedularcount);
-      alert('Values Missing in Tuesday');
-      return;
-    }
-
-    if (this.edit.Start_wed_hour == '-1' && this.edit.Start_wed_min == '-1' && this.edit.End_wed_hour == '-1' && this.edit.End_wed_min == '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else if (this.edit.Start_wed_hour != '-1' && this.edit.Start_wed_min != '-1' && this.edit.End_wed_hour != '-1' && this.edit.End_wed_min != '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else {
-      this.schedularcount++;
-      console.log("wed... " + this.schedularcount);
-      alert('Values Missing in Wednesday');
-      return;
-    }
-
-    if (this.edit.Start_thu_hour == '-1' && this.edit.Start_thu_min == '-1' && this.edit.End_thu_hour == '-1' && this.edit.End_thu_min == '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else if (this.edit.Start_thu_hour != '-1' && this.edit.Start_thu_min != '-1' && this.edit.End_thu_hour != '-1' && this.edit.End_thu_min != '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else {
-      this.schedularcount++;
-      console.log("thu... " + this.schedularcount);
-      alert('Values Missing in Thursday');
-      return;
-    }
-
-    if (this.edit.Start_fri_hour == '-1' && this.edit.Start_fri_min == '-1' && this.edit.End_fri_hour == '-1' && this.edit.End_fri_min == '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else if (this.edit.Start_fri_hour != '-1' && this.edit.Start_fri_min != '-1' && this.edit.End_fri_hour != '-1' && this.edit.End_fri_min != '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else {
-      this.schedularcount++;
-      console.log("fri... " + this.schedularcount);
-      alert('Values Missing in Friday');
-      return;
-    }
-
-    if (this.edit.Start_sat_hour == '-1' && this.edit.Start_sat_min == '-1' && this.edit.End_sat_hour == '-1' && this.edit.End_sat_min == '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else if (this.edit.Start_sat_hour != '-1' && this.edit.Start_sat_min != '-1' && this.edit.End_sat_hour != '-1' && this.edit.End_sat_min != '-1') {
-      this.schedularcount = this.schedularcount;
-    } else {
-      this.schedularcount++;
-      console.log("sat... " + this.schedularcount);
-      alert('Values Missing in Saturday');
-      return;
-    }
 
     if (!this.Idscheduler_exception) {
       this.Idscheduler_exception = null;

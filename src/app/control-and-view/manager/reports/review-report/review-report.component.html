@@ -4,7 +4,7 @@
     <h4 style="margin-left: 42%;margin-top: 4.5%">REPORTS ON FEEDBACK</h4>
   </div>
   <br>
-  <div style="margin-left: 1.5rem;margin-right: 1.5rem;width: 100%;margin-top: 2%;" class="row bg-info col-md-12">
+  <div style="margin-left: 1.5rem;margin-right: 1.5rem;width: 100%" class="row bg-info col-md-12">
     <div class="col-md-6">
       <h3 style="text-align: right"></h3>
       <div class="form-group">
@@ -34,6 +34,7 @@
       <thead class="tableHead">
         <th> DATE </th>
         <th> ROOM </th>
+        <th> TEMPLATE NAME</th>
         <th> QUESTION </th>
         <th> STAR RATING </th>
       </thead>
@@ -41,12 +42,13 @@
         <tr *ngFor="let x of viewReport">
           <td>{{x.ReviewDate}}</td>
           <td>{{x.RoomName}}</td>
+          <td>{{x.TemplateName}}</td>
           <td>{{x.Question}} </td>
-          <td *ngIf="x.ReviewTemplateQuestionID != 6">{{x.ReviewValue}}</td>
-          <td *ngIf="x.ReviewTemplateQuestionID == 6">{{x.Comments}}</td>
+          <td *ngIf="x.ReviewValue">{{x.ReviewValue}}</td>
+          <td *ngIf="x.Comments">{{x.Comments}}</td>
         </tr>
         <tr *ngIf="viewReport?.length == 0">
-          <td colspan="4" class="no-data-available">No records found</td>
+          <td colspan="5" class="no-data-available">No records found</td>
         </tr>
       </tbody>
     </table>
@@ -59,6 +61,7 @@
       <thead class="tableHead">
         <th> DATE </th>
         <th> ROOM </th>
+        <th> TEMPLATE NAME</th>
         <th> QUESTION </th>
         <th> STAR RATING </th>
       </thead>
@@ -66,12 +69,13 @@
         <tr *ngFor="let x of viewReport">
           <td>{{x.ReviewDate}}</td>
           <td>{{x.RoomName}}</td>
+          <td>{{x.TemplateName}}</td>
           <td>{{x.Question}} </td>
-          <td *ngIf="x.ReviewTemplateQuestionID != 6">{{x.ReviewValue}}</td>
-          <td *ngIf="x.ReviewTemplateQuestionID == 6">{{x.Comments}}</td>
+          <td *ngIf="x.ReviewValue">{{x.ReviewValue}}</td>
+          <td *ngIf="x.Comments">{{x.Comments}}</td>
         </tr>
         <tr *ngIf="viewReport?.length == 0">
-          <td colspan="4" class="no-data-available">No records found</td>
+          <td colspan="5" class="no-data-available">No records found</td>
         </tr>
       </tbody>
     </table>

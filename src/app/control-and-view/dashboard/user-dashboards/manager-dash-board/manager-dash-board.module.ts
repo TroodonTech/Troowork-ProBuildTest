@@ -746,6 +746,27 @@ const routes: Routes = [
         outlet: 'ManagerOut',
         loadChildren: '../../../dashboard/manager-dashboard-pages/expired-assignments-details/expired-assignments-details.module#ExpiredAssignmentsDetailsModule'
       },
+      {
+        path: 'createFeedbackTemplate',
+        outlet: 'ManagerOut',
+        loadChildren: '../../../manager/inspection/create-feedback-template/create-feedback-template.module#CreateFeedbackTemplateModule'
+      },
+      {
+        path: 'feedbackManage/editFeedbackTemplate/:idreviewtemplate',
+        outlet: 'ManagerOut',
+        loadChildren: '../../../manager/inspection/edit-feedback-template/edit-feedback-template.module#EditFeedbackTemplateModule',
+
+      },
+      {
+        path: 'feedbackManage/assignFeedbackTemplateTo/:idreviewtemplate',
+        outlet: 'ManagerOut',
+        loadChildren: '../../../manager/inspection/feedback-template-assign/feedback-template-assign.module#FeedbackTemplateAssignModule',
+      },
+      {
+        path: 'GenerateQRCode/combinedQRCodeView/:RoomKey',
+        outlet: 'ManagerOut',
+        loadChildren: '../../../manager/inventory/combine-qr-code-page/combine-qr-code-page.module#CombineQrCodePageModule'
+      },
     ]
   }
 ];

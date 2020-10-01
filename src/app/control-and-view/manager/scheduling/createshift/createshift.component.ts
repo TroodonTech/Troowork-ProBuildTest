@@ -28,6 +28,14 @@ export class CreateshiftComponent implements OnInit {
   masterhour: People[];
   masterminute: People[];
 
+  start_hour: String;
+  start_min: String;
+  start_format: String;
+  end_hour: String;
+  end_min: String;
+  end_format: String;
+
+
   start_sun_hour: String;
   start_sun_min: String;
   start_sun_format: String;
@@ -86,6 +94,8 @@ export class CreateshiftComponent implements OnInit {
 
   idscheduler_exception;
   schedularcount = 0;
+
+  showHide;
   url_base64_decode(str) {
     var output = str.replace('-', '+').replace('_', '/');
     switch (output.length % 4) {
@@ -124,91 +134,157 @@ export class CreateshiftComponent implements OnInit {
     }
     //Code for scheduler starts....
     this.schedularcount = 0;
-    if (!this.idscheduler_exception) {
-      this.idscheduler_exception = null;
-    }
+    if (this.showHide == true) {
+      if (!this.idscheduler_exception) {
+        this.idscheduler_exception = null;
+      }
 
-    if (this.start_sun_hour == '-1' && this.start_sun_min == '-1' && this.end_sun_hour == '-1' && this.end_sun_min == '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else if (this.start_sun_hour != '-1' && this.start_sun_min != '-1' && this.end_sun_hour != '-1' && this.end_sun_min != '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else {
-      this.schedularcount++;
-      alert('Values Missing in Sunday');
-      return;
-    }
+      if (this.start_sun_hour == '-1' && this.start_sun_min == '-1' && this.end_sun_hour == '-1' && this.end_sun_min == '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else if (this.start_sun_hour != '-1' && this.start_sun_min != '-1' && this.end_sun_hour != '-1' && this.end_sun_min != '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else {
+        this.schedularcount++;
+        alert('Values Missing in Sunday');
+        return;
+      }
 
-    if (this.start_mon_hour == '-1' && this.start_mon_min == '-1' && this.end_mon_hour == '-1' && this.end_mon_min == '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else if (this.start_mon_hour != '-1' && this.start_mon_min != '-1' && this.end_mon_hour != '-1' && this.end_mon_min != '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else {
-      this.schedularcount++;
-      alert('Values Missing in Monday');
-      return;
-    }
+      if (this.start_mon_hour == '-1' && this.start_mon_min == '-1' && this.end_mon_hour == '-1' && this.end_mon_min == '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else if (this.start_mon_hour != '-1' && this.start_mon_min != '-1' && this.end_mon_hour != '-1' && this.end_mon_min != '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else {
+        this.schedularcount++;
+        alert('Values Missing in Monday');
+        return;
+      }
 
-    if (this.start_tue_hour == '-1' && this.start_tue_min == '-1' && this.end_tue_hour == '-1' && this.end_tue_min == '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else if (this.start_tue_hour != '-1' && this.start_tue_min != '-1' && this.end_tue_hour != '-1' && this.end_tue_min != '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else {
-      this.schedularcount++;
-      alert('Values Missing in Tuesday');
-      return;
-    }
+      if (this.start_tue_hour == '-1' && this.start_tue_min == '-1' && this.end_tue_hour == '-1' && this.end_tue_min == '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else if (this.start_tue_hour != '-1' && this.start_tue_min != '-1' && this.end_tue_hour != '-1' && this.end_tue_min != '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else {
+        this.schedularcount++;
+        alert('Values Missing in Tuesday');
+        return;
+      }
 
-    if (this.start_wed_hour == '-1' && this.start_wed_min == '-1' && this.end_wed_hour == '-1' && this.end_wed_min == '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else if (this.start_wed_hour != '-1' && this.start_wed_min != '-1' && this.end_wed_hour != '-1' && this.end_wed_min != '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else {
-      this.schedularcount++;
-      alert('Values Missing in Wednesday');
-      return;
-    }
+      if (this.start_wed_hour == '-1' && this.start_wed_min == '-1' && this.end_wed_hour == '-1' && this.end_wed_min == '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else if (this.start_wed_hour != '-1' && this.start_wed_min != '-1' && this.end_wed_hour != '-1' && this.end_wed_min != '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else {
+        this.schedularcount++;
+        alert('Values Missing in Wednesday');
+        return;
+      }
 
-    if (this.start_thu_hour == '-1' && this.start_thu_min == '-1' && this.end_thu_hour == '-1' && this.end_thu_min == '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else if (this.start_thu_hour != '-1' && this.start_thu_min != '-1' && this.end_thu_hour != '-1' && this.end_thu_min != '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else {
-      this.schedularcount++;
-      alert('Values Missing in Thursday');
-      return;
-    }
+      if (this.start_thu_hour == '-1' && this.start_thu_min == '-1' && this.end_thu_hour == '-1' && this.end_thu_min == '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else if (this.start_thu_hour != '-1' && this.start_thu_min != '-1' && this.end_thu_hour != '-1' && this.end_thu_min != '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else {
+        this.schedularcount++;
+        alert('Values Missing in Thursday');
+        return;
+      }
 
-    if (this.start_fri_hour == '-1' && this.start_fri_min == '-1' && this.end_fri_hour == '-1' && this.end_fri_min == '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else if (this.start_fri_hour != '-1' && this.start_fri_min != '-1' && this.end_fri_hour != '-1' && this.end_fri_min != '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else {
-      this.schedularcount++;
-      alert('Values Missing in Friday');
-      return;
-    }
+      if (this.start_fri_hour == '-1' && this.start_fri_min == '-1' && this.end_fri_hour == '-1' && this.end_fri_min == '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else if (this.start_fri_hour != '-1' && this.start_fri_min != '-1' && this.end_fri_hour != '-1' && this.end_fri_min != '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else {
+        this.schedularcount++;
+        alert('Values Missing in Friday');
+        return;
+      }
 
-    if (this.start_sat_hour == '-1' && this.start_sat_min == '-1' && this.end_sat_hour == '-1' && this.end_sat_min == '-1') {
-      this.schedularcount = this.schedularcount;
-    }
-    else if (this.start_sat_hour != '-1' && this.start_sat_min != '-1' && this.end_sat_hour != '-1' && this.end_sat_min != '-1') {
-      this.schedularcount = this.schedularcount;
-    } else {
-      this.schedularcount++;
-      alert('Values Missing in Saturday');
-      return;
+      if (this.start_sat_hour == '-1' && this.start_sat_min == '-1' && this.end_sat_hour == '-1' && this.end_sat_min == '-1') {
+        this.schedularcount = this.schedularcount;
+      }
+      else if (this.start_sat_hour != '-1' && this.start_sat_min != '-1' && this.end_sat_hour != '-1' && this.end_sat_min != '-1') {
+        this.schedularcount = this.schedularcount;
+      } else {
+        this.schedularcount++;
+        alert('Values Missing in Saturday');
+        return;
+      }
+    } else if (this.showHide == false) {
+      console.log(this.start_format+"  "+this.end_format);
+      if (this.start_hour == '-1' || this.start_min == '-1' || this.end_hour == '-1' || this.end_min == '-1') {
+        this.schedularcount++;
+        alert('Values Missing in Start and End Time');
+        return;
+      } else {
+        this.start_sun_hour = this.start_hour;
+        this.start_sun_min = this.start_min;
+        this.start_sun_format = this.start_format;
+
+        this.start_mon_hour = this.start_hour;
+        this.start_mon_min = this.start_min;
+        this.start_mon_format = this.start_format;
+
+        this.start_tue_hour = this.start_hour;
+        this.start_tue_min = this.start_min;
+        this.start_tue_format = this.start_format;
+
+        this.start_wed_hour = this.start_hour;
+        this.start_wed_min = this.start_min;
+        this.start_wed_format = this.start_format;
+
+        this.start_thu_hour = this.start_hour;
+        this.start_thu_min = this.start_min;
+        this.start_thu_format = this.start_format;
+
+        this.start_fri_hour = this.start_hour;
+        this.start_fri_min = this.start_min;
+        this.start_fri_format = this.start_format;
+
+        this.start_sat_hour = this.start_hour;
+        this.start_sat_min = this.start_min;
+        this.start_sat_format = this.start_format;
+
+        this.end_sun_hour = this.end_hour;
+        this.end_sun_min = this.end_min;
+        this.end_sun_format = this.end_format;
+
+        this.end_mon_hour = this.end_hour;
+        this.end_mon_min = this.end_min;
+        this.end_mon_format = this.end_format;
+
+        this.end_tue_hour = this.end_hour;
+        this.end_tue_min = this.end_min;
+        this.end_tue_format = this.end_format;
+
+        this.end_wed_hour = this.end_hour;
+        this.end_wed_min = this.end_min;
+        this.end_wed_format = this.end_format;
+
+        this.end_thu_hour = this.end_hour;
+        this.end_thu_min = this.end_min;
+        this.end_thu_format = this.end_format;
+
+        this.end_fri_hour = this.end_hour;
+        this.end_fri_min = this.end_min;
+        this.end_fri_format = this.end_format;
+
+        this.end_sat_hour = this.end_hour;
+        this.end_sat_min = this.end_min;
+        this.end_sat_format = this.end_format;
+      }
+
     }
     //Code for scheduler ends....
     if (this.schedularcount == 0) {
@@ -352,6 +428,12 @@ export class CreateshiftComponent implements OnInit {
     this.employeekey = profile.employeekey;
     this.OrganizationID = profile.OrganizationID;
 
+    if (this.OrganizationID == 223 || this.OrganizationID == 134) {
+      this.showHide = true;
+    } else {
+      this.showHide = false;
+    }
+
     this.isemployeecalendar = profile.isemployeecalendar;
     //token ends
 
@@ -428,6 +510,16 @@ export class CreateshiftComponent implements OnInit {
     this.end_sat_min = '-1';
     this.end_sat_format = 'AM';
     this.idscheduler_exception = '';
+
+
+    this.start_hour = '-1';
+    this.start_min = '-1';
+    this.start_format = 'AM';
+
+    this.end_hour = '-1';
+    this.end_min = '-1';
+    this.end_format = 'AM';
+
   }
 
 }

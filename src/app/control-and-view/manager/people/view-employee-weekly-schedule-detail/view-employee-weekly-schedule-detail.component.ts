@@ -55,6 +55,7 @@ export class ViewEmployeeWeeklyScheduleDetailComponent implements OnInit {
   exceptionstartdate: Date;
   exceptionsdate;
 
+  showHide;
 
   //Author: Prakash Code Starts for Employee Calendar Ends Here
 
@@ -267,7 +268,11 @@ export class ViewEmployeeWeeklyScheduleDetailComponent implements OnInit {
     this.OrganizationID = profile.OrganizationID;
     this.isemployeecalendar = profile.isemployeecalendar;//Author: Prakash for Checking Whether the organization uses Calendar or not
 
-
+    if (this.OrganizationID == 223 || this.OrganizationID == 134) {
+      this.showHide = true;
+    } else {
+      this.showHide = false;
+    }
     this.PeopleServiceService.EditEmployeeDetailsbyManager(this.empk$, this.OrganizationID).subscribe((data: Array<any>) => {
       this.editempdtails = data[0];
       this.BirthDate = this.editempdtails.BirthDate;
