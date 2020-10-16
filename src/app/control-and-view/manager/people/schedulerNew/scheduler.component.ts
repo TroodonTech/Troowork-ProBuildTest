@@ -10,74 +10,44 @@ import { ModalDirective } from 'angular-bootstrap-md';
 import { DatepickerOptions } from 'ng2-datepicker';
 @Component({
   selector: 'scheduler-component',
-
-  // <div class="note">Cell Width: <input type="range" min="10" max="200" step="10" id="cellwidth" value="40"/> <span
-  // id="label">40</span></div>
   template: `
   <img *ngIf="loading" src="../../../../../assets/img/loader.gif" style="margin-left: 35rem; width: 20%" />
-  <div *ngIf="!loading">
-  <div style="padding-left: 9rem;padding-right: 9rem;margin-top: 3%;margin-bottom: 1%;">
+<div *ngIf="!loading">
+  <div style="margin-top: 1%;margin-bottom: 1%;">
     <div class="row col-md-12 ">
-        <h4 style="margin-left: 42%;margin-bottom:4%">EMPLOYEE SCHEDULER</h4>
+      <h4 style="margin-left: 42%;">EMPLOYEE SCHEDULER</h4>
     </div>
-    <div style="margin-left: 1.5rem;margin-right: 1.5rem;padding-bottom: 1rem;padding-top: 3%"
-        class="row bg-info col-md-12">
-        <div class="col-md-6">
-            <h3 style="text-align: right"></h3>
-            <div class="form-group" style="width: 85%;">
-                <label>Date*</label>
-                <ng-datepicker [options]="options" position="top-right" [(ngModel)]="date"
-                    (ngModelChange)="selecteddate();empCalendarActivities();"></ng-datepicker>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <h3 style="text-align: right"></h3>
-            <div class="form-group" style="width: 85%;">
-                <label>View Range*</label>
-                <select [(ngModel)]="Range" (change)='ViewType();empCalendarActivities();'
-                    class="form-control col-sm-9 col-md-9 col-lg-9" [value]="value" style="background-color: #d4f4ff;">
-                    <!-- <option value="">--Select--</option> -->
-                    <!-- <option value="Daily">Daily</option>-->
-                    <option value="Week">Week</option>
-                    <option value="Month">Month</option>
-                </select>
-            </div>
-        </div>
+    <div class="row bg-info col-md-12" style="padding-top: 1%;padding-bottom: 1%;margin-left: 0%;">
+      <div class="form-group col-md-3">
+        <label>Date*</label>
+        <ng-datepicker [options]="options" position="bottom-right" [(ngModel)]="date" style="z-index:1" (ngModelChange)="selecteddate();empCalendarActivities();"></ng-datepicker>
+      </div>
+      <div class="form-group col-md-3">
+        <label>View Range*</label>
+        <select [(ngModel)]="Range" (change)='ViewType();empCalendarActivities();' class="form-control col-sm-9 col-md-9 col-lg-9" [value]="value" style="background-color: #d4f4ff;">
+          <option value="Week">Week</option>
+          <option value="Month">Month</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label>Search Employee:</label>
+        <ng-multiselect-dropdown [placeholder]="'Select Employee'" defaultOpen="true" [data]="empList" [(ngModel)]="filter.text" [settings]="dropdownSettings1">
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="eventsonly"><input type="checkbox" id="eventsonly" [ngModel]="filter.eventsOnly" (ngModelChange)="changeWithEvents($event)"> Don't show employees without assignments</label>
+        &nbsp;
+        <button (click)="clearFilter()">Clear</button>
+        &nbsp;
+        <button (click)="applyFilter()">Apply</button>
+      </div>
     </div>
-</div>
-
-<div style="padding-left: 9rem;padding-right: 9rem;margin-top: 1%;margin-bottom: 3%;">
-
-    <div style="margin-left: 1.5rem;margin-right: 1.5rem;padding-bottom: 1rem;padding-top: 1rem"
-        class="row bg-info col-md-12">
-        <div class="col-md-6">
-            <h3 style="text-align: right"></h3>
-            <div class="form-group" style="width: 85%;">
-                <label>Search Employee:</label>
-                <ng-multiselect-dropdown [placeholder]="'Select Employee'" defaultOpen="true" [data]="empList"
-                    [(ngModel)]="filter.text" [settings]="dropdownSettings1">
-                </ng-multiselect-dropdown>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <h3 style="text-align: right"></h3>
-            <div class="form-group" style="width: 85%;">
-                <label for="eventsonly"><input type="checkbox" id="eventsonly" [ngModel]="filter.eventsOnly"
-                        (ngModelChange)="changeWithEvents($event)"> Don't show employees without assignments</label>
-                <br>
-                <button (click)="clearFilter()">Clear</button>
-                &nbsp;
-                <button (click)="applyFilter()">Apply</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-  <daypilot-scheduler [config]="config" [events]="events" #scheduler></daypilot-scheduler>
   </div>
-  <create-dialog #create (close)="createClosed($event)"></create-dialog>
-  <edit-dialog #edit (close)="editClosed($event)"></edit-dialog>
-
+  <daypilot-scheduler [config]="config" [events]="events" #scheduler></daypilot-scheduler>
+</div>
+<create-dialog #create (close)="createClosed($event)"></create-dialog>
+<edit-dialog #edit (close)="editClosed($event)"></edit-dialog>
 `,
   styles: [`
    p, body, td { font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; }
@@ -90,6 +60,7 @@ import { DatepickerOptions } from 'ng2-datepicker';
             .header h1 { padding: 0px; margin: 0px; }
             .main { padding: 10px; margin-top: 10px; }
             .bg-info { background-color: #FFFFFF !important; }
+            ::ng-deep.ngx-datepicker-position-bottom-right {z-index:1;}     
   `]
 })
 export class SchedulerComponent implements AfterViewInit {
@@ -102,6 +73,8 @@ export class SchedulerComponent implements AfterViewInit {
   @ViewChild("create") create: CreateComponent;
   @ViewChild("edit") edit: EditComponent;
   @ViewChild('basicModal') basicModal: ModalDirective;
+  clipboard: DayPilot.Event[] = [];
+  autoCopy: boolean;
 
   events: any[] = [];
   date;
@@ -126,8 +99,6 @@ export class SchedulerComponent implements AfterViewInit {
   disableFlag;
   loading = false;;
   expand;
-  clipboard;
-  autoCopy: boolean;
   copied_event;
   filter = {
     text: [],
@@ -167,7 +138,7 @@ export class SchedulerComponent implements AfterViewInit {
     barTitleIfEmpty: 'Click to select a date',
     placeholder: 'Click to select a date', // HTML input placeholder attribute (default: '')
     addClass: '', // Optional, value to pass on to [ngClass] on the input field
-    addStyle: { 'font-size': '18px', 'width': '75%', 'border': '1px solid #ced4da', 'border-radius': '0.25rem' }, // Optional, value to pass to [ngStyle] on the input field
+    addStyle: { 'font-size': '18px', 'width': '85%', 'border': '1px solid #ced4da', 'border-radius': '0.25rem', 'z-index': '99' }, // Optional, value to pass to [ngStyle] on the input field
     fieldId: 'my-date-picker', // ID to assign to the input field. Defaults to datepicker-<counter>
     useEmptyBarTitle: false, // Defaults to true. If set to false then barTitleIfEmpty will be disregarded and a date will always be shown 
   };
@@ -227,6 +198,16 @@ export class SchedulerComponent implements AfterViewInit {
 
     // new features added.... starts
     crosshairType: "Full",
+    allowMultiSelect: true,
+    eventClickHandling: "Select",
+    onEventSelect: args => {
+      let selected = this.scheduler.control.multiselect.events();
+      let onlyThis = !args.selected && !args.ctrl && !args.meta;
+      if (selected.length > 0 && selected[0].resource() !== args.e.resource() && !onlyThis) {
+        this.scheduler.control.message("You can only select events from the same row.");
+        args.preventDefault();
+      }
+    },
     // onIncludeTimeCell: args => {
     //   if (args.cell.start.getDayOfWeek() === 0 || args.cell.start.getDayOfWeek() === 6) { // hide Saturdays, Sundays
     //     args.cell.visible = false;
@@ -235,7 +216,7 @@ export class SchedulerComponent implements AfterViewInit {
     // new features added.... ends
     scale: "Day",
     cellDuration: 120,
-    cellWidth: 150,
+    cellWidth: 250,
     eventHeight: 30,
     days: DayPilot.Date.today().daysInMonth(),
     startDate: DayPilot.Date.today(),
@@ -260,6 +241,12 @@ export class SchedulerComponent implements AfterViewInit {
     timeRangeSelectedHandling: 'Hold',
     contextMenuResource: this.menu,
     contextMenu: new DayPilot.Menu({
+      onShow: args => {
+        if (!this.scheduler.control.multiselect.isSelected(args.source)) {
+          this.scheduler.control.multiselect.clear();
+          this.scheduler.control.multiselect.add(args.source);
+        }
+      },
       items: [
         // { text: "Edit", onClick: args => this.edit.show(args.source) },
         {
@@ -269,13 +256,27 @@ export class SchedulerComponent implements AfterViewInit {
           }
         },
         {
+          text: "Edit", onClick: args => {
+            this.ds.setData(this.Range, this.date);
+            console.log(args);
+            console.log(this.Range);
+            console.log(this.date);
+            this.edit.show(args.source).then(data1 => {
+
+            });
+          }
+        },
+        {
           text: "Copy",
           onClick: args => {
-            this.copied_event = args.source.data;
-            this.clipboard = args.source.data.ScheduleName;
-
-            console.log("this.copied_event");
-            console.log(this.copied_event);
+            // this.copied_event = args.source.data;
+            // this.clipboard = args.source.data.ScheduleName;
+            let selected = this.scheduler.control.multiselect.events();
+            this.clipboard = selected.sort((e1, e2) => e1.start().getTime() - e2.start().getTime());
+            // this.clipboard = [args.source];
+            console.log(this.clipboard);
+            // console.log("this.copied_event");
+            // console.log(this.copied_event);
 
           }
         }
@@ -294,35 +295,46 @@ export class SchedulerComponent implements AfterViewInit {
             if (this.clipboard.length === 0) {
               return;
             }
-            console.log("args paste");
-            console.log(args);
-            let obj = {
-              resourceEmployee: args.source.resource,
-              start: this.convert_DT(args.source.start.value),
-              ScheduleNameKey: this.copied_event.ScheduleNameKey,
-              MetaEmp: this.employeekey,
-              OrganizationID: this.OrganizationID
-            };
-            console.log("obj");
-            console.log(obj);
-            this.loading = true;
-            this.SchedulingService.SchedulerEventCreate(obj).subscribe(data => {
-              this.loading = false;
-              this.empCalendarActivities();
-              // this.clipboard = "";
-            });
+            let targetStart = args.source.start;
+            let targetResource = args.source.resource;
+            let firstStart = this.clipboard[0].start();
 
+            this.clipboard.forEach(e => {
+
+              console.log("args paste");
+              console.log(args);
+
+              let offset = new DayPilot.Duration(firstStart, e.start());
+              // let duration = e.duration();
+              let start = targetStart.addTime(offset);
+
+              let obj = {
+                resourceEmployee: targetResource,
+                start: start,
+                ScheduleNameKey: e.data.ScheduleNameKey,
+                MetaEmp: this.employeekey,
+                OrganizationID: this.OrganizationID
+              };
+              console.log("obj");
+              console.log(obj);
+              this.loading = true;
+              this.SchedulingService.SchedulerEventCreate(obj).subscribe(data => {
+                this.loading = false;
+                this.empCalendarActivities();
+                // this.clipboard = "";
+              });
+            });
           }
         }
       ]
     }),
 
     onEventClicked: args => {
-      this.ds.setData(this.Range, this.date);
-      this.edit.show(args.e).then(data1 => {
+      // this.ds.setData(this.Range, this.date);
+      // this.edit.show(args.e).then(data1 => {
 
-        // this.empCalendarActivities();
-      });
+      // this.empCalendarActivities();
+      // });
     },
     onTimeRangeSelect: args => {
 
@@ -507,7 +519,9 @@ export class SchedulerComponent implements AfterViewInit {
       ];
       this.config.scale = "Day";
       this.config.cellDuration = 120;
-      this.config.cellWidth = 150;
+      this.config.cellWidth = 250;
+      this.config.allowMultiSelect = true;
+      this.config.eventClickHandling = "Select";
       this.config.days = DayPilot.Date.today().daysInMonth();
       if (this.date) {
         this.config.startDate = this.convert_DT(this.date);
@@ -534,9 +548,11 @@ export class SchedulerComponent implements AfterViewInit {
       ];
       this.config.scale = "Day";
       this.config.cellDuration = 120;
-      this.config.cellWidth = 200;
+      this.config.cellWidth = 250;
       this.config.days = 7;
       this.config.startDate = this.convert_DT(this.date);
+      this.config.allowMultiSelect = true;
+      this.config.eventClickHandling = "Select";
     }
   }
   selecteddate() {
