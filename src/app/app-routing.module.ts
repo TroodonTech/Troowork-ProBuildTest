@@ -29,6 +29,10 @@ const routes: Routes = [
     path: 'QRCodeView/:rev_orgid/:room_key',
     loadChildren: './control-and-view/combinedqrcode-view/combinedqrcode-view.module#CombinedqrcodeViewModule'
   },
+  {
+    path: 'supportYou',
+    loadChildren: './control-and-view/support-page/support-page.module#SupportPageModule'
+  },
 ];
 
 
