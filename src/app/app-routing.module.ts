@@ -30,7 +30,7 @@ const routes: Routes = [
     loadChildren: './control-and-view/combinedqrcode-view/combinedqrcode-view.module#CombinedqrcodeViewModule'
   },
   {
-    path: 'supportYou',
+    path: 'support',
     loadChildren: './control-and-view/support-page/support-page.module#SupportPageModule'
   },
 ];
