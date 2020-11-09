@@ -24,12 +24,12 @@
 
       <div class="form-group" *ngIf="useType === 'User Registration'">
         <label>Last Name*</label>
-        <input type="text" name="FirstName" class="form-control" maxlength="150" placeholder="First Name" [(ngModel)]="LastName">
+        <input type="text" name="FirstName" class="form-control" maxlength="150" placeholder="Last Name" [(ngModel)]="LastName">
       </div>
 
       <div class="form-group" *ngIf="useType === 'User Registration'">
         <label>Email ID*</label>
-        <input type="text" name="EmailID" [(ngModel)]="EmailID" maxlength="40" class="form-control rounded-1 " placeholder="Email" email #prmEmail="ngModel">
+        <input type="text" name="EmailID" [(ngModel)]="EmailID" maxlength="40" class="form-control rounded-1 " placeholder="Email ID" email #prmEmail="ngModel">
         <div *ngIf="prmEmail.errors?.email" style="color: red;">
           Email not valid.
         </div>
@@ -39,7 +39,7 @@
     <div class="col-md-6">
       <div class="form-group" *ngIf="useType === 'Support'">
         <label>Email ID*</label>
-        <input type="text" name="EmailID" [(ngModel)]="EmailID" maxlength="40" class="form-control rounded-1 " placeholder="Email" email #prmEmail="ngModel">
+        <input type="text" name="EmailID" [(ngModel)]="EmailID" maxlength="40" class="form-control rounded-1 " placeholder="Email ID" email #prmEmail="ngModel">
         <div *ngIf="prmEmail.errors?.email" style="color: red;">
           Email not valid.
         </div>
@@ -51,13 +51,13 @@
       </div>
       <div class="form-group" *ngIf="useType === 'User Registration'">
         <label>Organization Name*</label>
-        <input type="text" name="FirstName" class="form-control" maxlength="300" placeholder="First Name" [(ngModel)]="Organization">
+        <input type="text" name="FirstName" class="form-control" maxlength="300" placeholder="Organization Name" [(ngModel)]="Organization">
       </div>
     </div>
     <div class="col-md-12">
       <div class="form-group" *ngIf="useType === 'Support'">
         <label>How can we help you? *</label>
-        <textarea class="form-control rounded-1 " maxlength="85" rows="5" cols="100" [(ngModel)]="comments" placeholder="Enter the comments" id="exampleFormControlTextarea1"></textarea>
+        <textarea class="form-control rounded-1 " maxlength="85" rows="5" cols="100" [(ngModel)]="comments" placeholder="How can we help you?" id="exampleFormControlTextarea1"></textarea>
       </div>
     </div>
   </div>
