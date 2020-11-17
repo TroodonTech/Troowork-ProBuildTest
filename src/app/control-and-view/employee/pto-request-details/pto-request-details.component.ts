@@ -79,6 +79,18 @@ export class PtoRequestDetailsComponent implements OnInit {
     }
   }
 
+  cancelPTO() {
+    this.PeopleServiceService.cancelPTObyEmployee(this.ptorequestID$, this.toServeremployeekey, this.OrganizationID, this.convert_DT(new Date())).subscribe((data) => {
+      alert("Request successfully cancelled by employee");
+      if (this.role == 'Employee') {
+        this.router.navigate(['/EmployeeDashboard', { outlets: { EmployeeOut: ['ViewPtoRequest'] } }]);
+      } else if (this.role == 'Supervisor') {
+        this.router.navigate(['/SupervisorDashboard', { outlets: { Superout: ['ViewPtoRequest'] } }]);
+      }
+    });
+  }
+
+
   ngOnInit() {
 
     var token = localStorage.getItem('token');

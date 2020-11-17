@@ -22018,6 +22018,117 @@ app.get(securedpath + '/getTemplateDetailsForFeedbackByRoomID_OrgId', function (
 // feedback template ends...
 
 
+app.get(securedpath + '/employeesForScheduler_SuType_mob', function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    var groupID = url.parse(req.url, true).query['groupID'];
+    var empkey = url.parse(req.url, true).query['empkey'];
+    var OrganizationID = url.parse(req.url, true).query['OrganizationID'];
+
+    pool.getConnection(function (err, connection) {
+        if (err) {
+
+            console.log("Failed! Connection with Database spicnspan via connection pool failed");
+        }
+        else {
+            console.log("Success! Connection with Database spicnspan via connection pool succeeded");
+            connection.query('set@groupID=?;set @empkey=?;set @OrganizationID=?; call usp_getEmployeesForScheduler_SuType_mob(@groupID,@empkey,@OrganizationID)', [groupID, empkey, OrganizationID], function (err, rows) {//IMPORTANT : (err,rows) this order matters.
+                if (err) {
+                    console.log("Problem with MySQL" + err);
+                }
+                else {
+                    res.end(JSON.stringify(rows[3]));
+                }
+            });
+        }
+        connection.release();
+    });
+});
+
+app.get(securedpath + '/employeeCalendarDetailsForScheduler_mob', function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    var dateRange = url.parse(req.url, true).query['dateRange'];
+    var startDate = url.parse(req.url, true).query['startDate'];
+    var OrganizationID = url.parse(req.url, true).query['OrganizationID'];
+
+    pool.getConnection(function (err, connection) {
+        if (err) {
+
+            console.log("Failed! Connection with Database spicnspan via connection pool failed");
+        }
+        else {
+            console.log("Success! Connection with Database spicnspan via connection pool succeeded");
+            connection.query('set @startDate=?;set @dateRange=?;set @OrganizationID=?; call usp_getEmpDetailsFromEmpCalendar_mob(@startDate,@dateRange,@OrganizationID)', [startDate, dateRange, OrganizationID], function (err, rows) {//IMPORTANT : (err,rows) this order matters.
+                if (err) {
+                    console.log("Problem with MySQL" + err);
+                }
+                else {
+
+                    res.end(JSON.stringify(rows[3]));
+                }
+            });
+        }
+        connection.release();
+    });
+});
+
+app.post(securedpath + '/cancelPTORequest', supportCrossOriginScript, function (req, res) {
+
+    var todayDate = req.body.todayDate;
+    var ptorequestID = req.body.ptorequestID;
+    var EmpKey = req.body.EmpKey;
+    var OrgID = req.body.OrgID;
+    pool.getConnection(function (err, connection) {
+        if (err) {
+
+            console.log("Failed! Connection with Database spicnspan via connection pool failed");
+        }
+        else {
+            console.log("Success! Connection with Database spicnspan via connection pool succeeded");
+            connection.query("set @todayDate=?;set @ptorequestID=?;set @EmpKey=?;set @OrgID=?;call usp_cancelPTORequest(@todayDate,@ptorequestID,@EmpKey,@OrgID)", [todayDate, ptorequestID, EmpKey, OrgID], function (err, rows) {
+                if (err) {
+                    console.log("Problem with MySQL" + err);
+                }
+                else {
+
+                    res.end(JSON.stringify(rows[7]));
+                }
+            });
+        }
+        connection.release();
+    });
+});
+
+app.get(securedpath + '/employeesrowFiltering_mob', function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    var groupID = url.parse(req.url, true).query['groupID'];
+    var searchtext = url.parse(req.url, true).query['searchtext'];
+    var range = url.parse(req.url, true).query['range'];
+    var todaydate = url.parse(req.url, true).query['todaydate'];
+    var OrganizationID = url.parse(req.url, true).query['OrganizationID'];
+
+    pool.getConnection(function (err, connection) {
+        if (err) {
+
+            console.log("Failed! Connection with Database spicnspan via connection pool failed");
+        }
+        else {
+            111
+            console.log("Success! Connection with Database spicnspan via connection pool succeeded");
+            connection.query('set@groupID=?;set @searchtext=?;set@range=?;set @todaydate=?;set @OrganizationID=?; call usp_getEmployeesForSchedulerWithrowFiltering_mob(@groupID,@searchtext,@range,@todaydate,@OrganizationID)', [groupID, searchtext, range, todaydate, OrganizationID], function (err, rows) {//IMPORTANT : (err,rows) this order matters.
+                if (err) {
+                    console.log("Problem with MySQL" + err);
+                }
+                else {
+                    res.end(JSON.stringify(rows[5]));
+                }
+            });
+        }
+        connection.release();
+    });
+});
 //Rodney ends
 //handle generic exceptions
 //catch all other resource routes that are not defined above
