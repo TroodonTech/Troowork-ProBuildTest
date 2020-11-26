@@ -352,8 +352,44 @@ const routes: Routes = [
         path: 'viewWORemainingDetails/:fromdt/:todt/:empKey/:wotypeKey/:empName/:wotypeName',
         outlet: 'Superout',
         loadChildren: '../../../manager/reports/view-remaining-workorders-details/view-remaining-workorders-details.module#ViewRemainingWorkordersDetailsModule'
+      },
+      // TRADE
 
-      }
+      {
+        path: 'TradeRequest',
+        outlet: 'Superout',
+        loadChildren: '../../../employee/trade-request/trade-request.module#TradeRequestModule',
+      },
+      {
+        path: 'ViewTradeRequest',
+        outlet: 'Superout',
+        loadChildren: '../../../employee/trade-request-view/trade-request-view.module#TradeRequestViewModule',
+      },
+      {
+        path: 'ViewTradeRequest/TradeRequestEdit/:requestID',
+        outlet: 'Superout',
+        loadChildren: '../../../employee/trade-request-edit/trade-request-edit.module#TradeRequestEditModule',
+      },
+      {
+        path: 'ViewTradeRequest/TradeRequestApprove/:requestID',
+        outlet: 'Superout',
+        loadChildren: '../../../employee/trade-request-approve/trade-request-approve.module#TradeRequestApproveModule',
+      },
+      {
+        path: 'ViewTradeRequest/TradeRequestDetails/:requestID',
+        outlet: 'Superout',
+        loadChildren: '../../../employee/trade-request-details/trade-request-details.module#TradeRequestDetailsModule',
+      },
+      {
+        path: 'TradeRequestsFromEmployees',
+        outlet: 'Superout',
+        loadChildren: '../../../manager/people/trade-requestsfrom-employees/trade-requestfrom-employees.module#TradeRequestfromEmployeesModule',
+      },
+      {
+        path: 'TradeRequestsFromEmployees/TradeRequestAction/:requestID',
+        outlet: 'Superout',
+        loadChildren: '../../../manager/people/trade-request-action/trade-request-action.module#TradeRequestActionModule',
+      },
     ]
   }
 ];

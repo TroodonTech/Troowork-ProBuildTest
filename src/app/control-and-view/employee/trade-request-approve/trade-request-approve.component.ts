@@ -10,8 +10,8 @@ import { DatepickerOptions } from 'ng2-datepicker';
 })
 export class TradeRequestApproveComponent implements OnInit {
 
-    ////////Author :  Aswathy//////
-    
+  ////////Author :  Aswathy//////
+
   role: String;
   name: String;
   employeekey: Number;
@@ -54,6 +54,23 @@ export class TradeRequestApproveComponent implements OnInit {
     fieldId: 'my-date-picker', // ID to assign to the input field. Defaults to datepicker-<counter>
     useEmptyBarTitle: false, // Defaults to true. If set to false then barTitleIfEmpty will be disregarded and a date will always be shown 
   };
+  options1: DatepickerOptions = {
+    minYear: 1970,
+    maxYear: 2030,
+    displayFormat: 'MM/DD/YYYY',
+    barTitleFormat: 'MMMM YYYY',
+    dayNamesFormat: 'dd',
+    firstCalendarDay: 0, // 0 - Sunday, 1 - Monday
+    //locale: frLocale,
+    //minDate: new Date(Date.now()), // Minimal selectable date
+    //maxDate: new Date(Date.now()),  // Maximal selectable date
+    // barTitleIfEmpty: 'Click to select a date',
+    // placeholder: 'Click to select a date', // HTML input placeholder attribute (default: '')
+    addClass: 'form-control', // Optional, value to pass on to [ngClass] on the input field
+    addStyle: { 'font-size': '18px', 'width': '75%', 'border': '1px solid #ced4da', 'border-radius': '0.25rem' }, // Optional, value to pass to [ngStyle] on the input field
+    fieldId: 'my-date-picker', // ID to assign to the input field. Defaults to datepicker-<counter>
+    useEmptyBarTitle: false, // Defaults to true. If set to false then barTitleIfEmpty will be disregarded and a date will always be shown 
+  };
   url_base64_decode(str) {
     var output = str.replace('-', '+').replace('_', '/');
     switch (output.length % 4) {
@@ -70,9 +87,9 @@ export class TradeRequestApproveComponent implements OnInit {
     }
     return window.atob(output);
   }
-  constructor(public PeopleServiceService:PeopleServiceService, private router:Router , private route:ActivatedRoute) {
+  constructor(public PeopleServiceService: PeopleServiceService, private router: Router, private route: ActivatedRoute) {
     this.route.params.subscribe(params => this.traderequestDetails$ = params.requestID);
-   }
+  }
 
   ngOnInit() {
     var token = localStorage.getItem('token');
@@ -105,8 +122,8 @@ export class TradeRequestApproveComponent implements OnInit {
           this.assignmentdetails = "No Assignments found";
         }
       });
-    }
- 
+  }
+
   goBack() {
     this.router.navigate(['/EmployeeDashboard', { outlets: { EmployeeOut: ['ViewTradeRequest'] } }]);
   }
@@ -133,29 +150,37 @@ export class TradeRequestApproveComponent implements OnInit {
       if ((this.convert_DT(this.traderequestdetailsbyID.ApprovedStartDate) < this.convert_DT(this.traderequestdetailsbyID.StartDate)) || (this.convert_DT(this.traderequestdetailsbyID.ApprovedStartDate) > this.convert_DT(this.traderequestdetailsbyID.EndDate))) {
         alert("Approved start date must be between requested dates!");
         return;
+      } else {
+        this.traderequestdetailsbyID.ApprovedStartDate = this.convert_DT(this.traderequestdetailsbyID.ApprovedStartDate);
       }
+
       if ((this.convert_DT(this.traderequestdetailsbyID.ApprovedEndDate) < this.convert_DT(this.traderequestdetailsbyID.StartDate)) || (this.convert_DT(this.traderequestdetailsbyID.ApprovedEndDate) > this.convert_DT(this.traderequestdetailsbyID.EndDate))) {
         alert("Approved end date must be between requested dates!");
         return;
+      } else {
+        this.traderequestdetailsbyID.ApprovedEndDate = this.convert_DT(this.traderequestdetailsbyID.ApprovedEndDate);
       }
+    } else if ((this.traderequestdetailsbyID.Status) == "Rejected") {
+      if (!(this.traderequestdetailsbyID.OtherEmployeeComments)) {
+        alert('Comments should be provided!');
+        return;
+      }
+      this.traderequestdetailsbyID.ApprovedStartDate = null;
+      this.traderequestdetailsbyID.ApprovedEndDate = null;
     }
 
-    if ((this.traderequestdetailsbyID.StatusComment)) {
-      var comments = this.traderequestdetailsbyID.StatusComment.trim();
-    }
-
-    if (!(comments)) {
-      alert('Comments are not provided !');
-      return;
+    if ((this.traderequestdetailsbyID.OtherEmployeeComments)) {
+      var comments = this.traderequestdetailsbyID.OtherEmployeeComments.trim();
     }
 
     this.PeopleServiceService.saveTradeRequestAction(this.traderequestDetails$, this.employeekey,
-      this.statuscurrentdate, this.convert_DT(this.traderequestdetailsbyID.ApprovedStartDate), this.convert_DT(this.traderequestdetailsbyID.ApprovedEndDate),
+      this.statuscurrentdate, this.traderequestdetailsbyID.ApprovedStartDate, this.traderequestdetailsbyID.ApprovedEndDate,
       this.traderequestdetailsbyID.Status, comments)
       .subscribe((data: any[]) => {
         this.details = data[0];
         alert("Request updated Successfully");
-        this.router.navigate(['/ManagerDashBoard', { outlets: { ManagerOut: ['TradeRequestsFromEmployees'] } }]);
+        this.goBack();
+        // this.router.navigate(['/ManagerDashBoard', { outlets: { ManagerOut: ['TradeRequestsFromEmployees'] } }]);
       });
   }
 }

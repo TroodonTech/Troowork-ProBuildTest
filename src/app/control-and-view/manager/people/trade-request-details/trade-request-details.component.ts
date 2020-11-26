@@ -4,13 +4,12 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { DatepickerOptions } from 'ng2-datepicker';
 
 @Component({
-  selector: 'app-trade-request-action',
-  templateUrl: './trade-request-action.component.html',
-  styleUrls: ['./trade-request-action.component.scss']
+  selector: 'app-trade-request-details',
+  templateUrl: './trade-request-details.component.html',
+  styleUrls: ['./trade-request-details.component.scss']
 })
-export class TradeRequestActionComponent implements OnInit {
+export class TradeRequestDetailsComponent implements OnInit {
 
-  //////////Authors : Aswathy///////
 
   role: String;
   name: String;
@@ -30,6 +29,7 @@ export class TradeRequestActionComponent implements OnInit {
   editflag;
   Status: String;
   details;
+
 
   options: DatepickerOptions = {
     minYear: 1970,
@@ -103,63 +103,6 @@ export class TradeRequestActionComponent implements OnInit {
   }
   constructor(private PeopleServiceService: PeopleServiceService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe(params => this.traderequestDetails$ = params.requestID);
-  }
-
-  saveTradeRequestAction() {
-
-    if (!(this.traderequestdetailsbyID.Status)) {
-      alert('Status is not provided !');
-      return;
-    }
-
-    if ((this.traderequestdetailsbyID.Status) == "Approved") {
-
-      if (!(this.traderequestdetailsbyID.ApproverApprovedStartDate)) {
-        alert('Approved Start Date is not provided !');
-        return;
-      }
-
-      if (!(this.traderequestdetailsbyID.ApproverApprovedEndDate)) {
-        alert('Approved End Date is not provided !');
-        return;
-      }
-
-
-      if ((this.convert_DT(this.traderequestdetailsbyID.ApproverApprovedStartDate) < this.convert_DT(this.traderequestdetailsbyID.StartDate)) || (this.convert_DT(this.traderequestdetailsbyID.ApproverApprovedStartDate) > this.convert_DT(this.traderequestdetailsbyID.EndDate))) {
-        alert("Approved start date must be between requested dates!");
-        return;
-      } else {
-        this.traderequestdetailsbyID.ApproverApprovedStartDate = this.convert_DT(this.traderequestdetailsbyID.ApproverApprovedStartDate);
-      }
-      if ((this.convert_DT(this.traderequestdetailsbyID.ApproverApprovedEndDate) < this.convert_DT(this.traderequestdetailsbyID.StartDate)) || (this.convert_DT(this.traderequestdetailsbyID.ApproverApprovedEndDate) > this.convert_DT(this.traderequestdetailsbyID.EndDate))) {
-        alert("Approved end date must be between requested dates!");
-        return;
-      } else {
-        this.traderequestdetailsbyID.ApproverApprovedEndDate = this.convert_DT(this.traderequestdetailsbyID.ApproverApprovedEndDate);
-      }
-
-      if ((this.traderequestdetailsbyID.ApproverComments)) {
-        var comments = this.traderequestdetailsbyID.ApproverComments.trim();
-      }
-    } else if ((this.traderequestdetailsbyID.Status) == "Rejected") {
-      if (!(this.traderequestdetailsbyID.ApproverComments)) {
-        alert("Status comments can't be empty");return;
-      }
-      else {
-        var comments = this.traderequestdetailsbyID.ApproverComments.trim();
-      }
-      this.traderequestdetailsbyID.ApproverApprovedStartDate = null;
-      this.traderequestdetailsbyID.ApproverApprovedEndDate = null;
-    }
-
-    this.PeopleServiceService.saveTradeRequestAction(this.traderequestDetails$, this.employeekey,
-      this.statuscurrentdate, this.traderequestdetailsbyID.ApproverApprovedStartDate, this.traderequestdetailsbyID.ApproverApprovedEndDate,
-      this.traderequestdetailsbyID.Status, comments)
-      .subscribe((data: any[]) => {
-        this.details = data[0];
-        alert("Request updated Successfully");
-        this.router.navigate(['/ManagerDashBoard', { outlets: { ManagerOut: ['TradeRequestsFromEmployees'] } }]);
-      });
   }
 
   ngOnInit() {

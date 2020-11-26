@@ -17,8 +17,7 @@
       <div style="margin-left:30%;margin-top: 1.3%">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <img class="imagesize nav-link" src="assets/icons/homepage.png"
-              [routerLink]="[{outlets:{Superout:['Supervisor_welcomePage']}}]">
+            <img class="imagesize nav-link" src="assets/icons/homepage.png" [routerLink]="[{outlets:{Superout:['Supervisor_welcomePage']}}]">
           </li>
           <li class="nav-item dropdown">
             <img class="imagesize nav-link" src="assets/icons/work order.png">
@@ -61,7 +60,7 @@
             <div class="dropdown-content" style="margin-left:1rem;">
               <a class="dropdown-item" [routerLink]="[{outlets:{Superout:['DashboardReport']}}]"><b>WorkOrder
                   Dashboard</b></a>
-               <a class="dropdown-item" [routerLink]="[{outlets:{Superout:['WorkorderReport']}}]"><b>WorkOrder</b></a>
+              <a class="dropdown-item" [routerLink]="[{outlets:{Superout:['WorkorderReport']}}]"><b>WorkOrder</b></a>
               <!--<a class="dropdown-item" [routerLink]="[{outlets:{Superout:['Batch-work-order-Report']}}]"><b>Batch
                   Work-Order Report</b></a>
               <a class="dropdown-item" [routerLink]="[{outlets:{Superout:['BatchScheduleAssignment']}}]"><b>View
@@ -88,6 +87,12 @@
                   Request</b></a>
               <a class="dropdown-item" [routerLink]="[{outlets:{Superout:['RequestsFromEmployees']}}]"><b>View
                   Employee PTO Requests</b></a>
+              <a class="dropdown-item" [routerLink]="[{outlets:{Superout:['TradeRequest']}}]"><b>Create
+                  TradeRequest</b></a>
+              <a class="dropdown-item" [routerLink]="[{outlets:{Superout:['ViewTradeRequest']}}]"><b>View
+                  TradeRequest</b></a>
+              <a class="dropdown-item" [routerLink]="[{outlets:{Superout:['TradeRequestsFromEmployees']}}]"><b>View
+                  Employee Trade Requests</b></a>
               <a class="dropdown-item" [routerLink]="[{outlets:{Superout:['schedulerReport']}}]"><b>Scheduler
                   Report</b></a>
             </div>

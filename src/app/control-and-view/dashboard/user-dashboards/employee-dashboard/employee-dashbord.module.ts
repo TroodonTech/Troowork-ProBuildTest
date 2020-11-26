@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { EmployeeDashboardComponent } from './employee-dashboard.component';
-import { TradeRequestApproveModule  } from '../../../employee/trade-request-approve/trade-request-approve.module';
+import { TradeRequestApproveModule } from '../../../employee/trade-request-approve/trade-request-approve.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
- const routes: Routes = [
+const routes: Routes = [
   {
     path: 'EmployeeDashboard',
     component: EmployeeDashboardComponent,//by varun - EmployeeDashboard as parent component
@@ -90,7 +90,12 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
         outlet: 'EmployeeOut',
         loadChildren: '../../../employee/trade-request-approve/trade-request-approve.module#TradeRequestApproveModule',
       },
-     ]
+      {
+        path: 'ViewTradeRequest/TradeRequestDetails/:requestID',
+        outlet: 'EmployeeOut',
+        loadChildren: '../../../employee/trade-request-details/trade-request-details.module#TradeRequestDetailsModule',
+      },
+    ]
   }
 ];
 

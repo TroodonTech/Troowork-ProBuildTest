@@ -8,8 +8,6 @@ import { PeopleServiceService } from "../../../../service/people-service.service
 })
 export class TradeRequestsfromEmployeesComponent implements OnInit {
 
-    //////////Authors : Aswathy///////
-
   role: String;
   name: String;
   employeekey: Number;
@@ -41,7 +39,7 @@ export class TradeRequestsfromEmployeesComponent implements OnInit {
   constructor(private PeopleServiceService: PeopleServiceService) { }
 
   ngOnInit() {
-    
+
     var token = localStorage.getItem('token');
     var encodedProfile = token.split('.')[1];
     var profile = JSON.parse(this.url_base64_decode(encodedProfile));
@@ -50,11 +48,11 @@ export class TradeRequestsfromEmployeesComponent implements OnInit {
     this.name = profile.username;
     this.employeekey = profile.employeekey;
     this.OrganizationID = profile.OrganizationID;
- 
-  this.PeopleServiceService.getTradeRequestdetailsforManager(this.OrganizationID)
-    .subscribe((data) => {
-    this.traderequestdetails = data;
-    });
+
+    this.PeopleServiceService.getTradeRequestdetailsforManager(this.employeekey, this.OrganizationID)
+      .subscribe((data) => {
+        this.traderequestdetails = data;
+      });
   }
 
 }

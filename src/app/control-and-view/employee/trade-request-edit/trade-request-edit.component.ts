@@ -9,8 +9,6 @@ import { Router, ActivatedRoute } from "@angular/router";
   styleUrls: ['./trade-request-edit.component.scss']
 })
 export class TradeRequestEditComponent implements OnInit {
-
-    ////////Author :  Aswathy//////
     
   role: String;
   name: String;
@@ -88,7 +86,7 @@ export class TradeRequestEditComponent implements OnInit {
       }
     }
 
-    if (!(this.traderequestdetails.OtherEmployee)) {
+    if (!(this.traderequestdetails.OtherEmployeeKey)) {
       alert('Employee is not provided !');
       return;
     }
@@ -107,7 +105,7 @@ export class TradeRequestEditComponent implements OnInit {
 
     var comments = this.traderequestdetails.Comments.trim();
 
-    this.PeopleServiceService.setEditedTradeRequest(curr_date, this.traderequestID$, this.traderequestdetails.OtherEmployee,
+    this.PeopleServiceService.setEditedTradeRequest(curr_date, this.traderequestID$, this.traderequestdetails.OtherEmployeeKey,
       this.convert_DT(this.traderequestdetails.StartDate), this.convert_DT(this.traderequestdetails.EndDate), comments).subscribe((data) => {
         this.traderequestdetails = data;
         alert('Trade Request Updated Successfully');

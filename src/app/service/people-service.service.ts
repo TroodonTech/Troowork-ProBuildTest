@@ -1044,10 +1044,10 @@ export class PeopleServiceService {
     };
     return this.http.post(url, obj);
   }
-  getTradeRequestdetailsforManager(orgID) {
+  getTradeRequestdetailsforManager(empKey, orgID) {
     return this
       .http
-      .get(ConectionSettings.Url + '/getTradeRequestdetailsforManager?OrganizationID=' + orgID);
+      .get(ConectionSettings.Url + '/getTradeRequestdetailsforManager?empKey=' + empKey + '&orgID=' + orgID);
   }
   getTradeRequestdetailsbyID(traderequestID) {
     return this
@@ -1344,7 +1344,6 @@ export class PeopleServiceService {
 
   }
 
-
   cancelPTObyEmployee(ptorequestID$, empKey, orgID, curDate) {
     const url = ConectionSettings.Url + "/cancelPTORequest";
     const obj = {
@@ -1356,5 +1355,25 @@ export class PeopleServiceService {
     return this.http.post(url, obj);
   }
 
+  requestForTradeCancel(TradeRequestID, empKey, curDate) {
+    const url = ConectionSettings.Url + "/requestForTradeCancel";
+    const obj = {
+      todayDate: curDate,
+      traderequestID: TradeRequestID,
+      EmpKey: empKey
+    };
+    return this.http.post(url, obj);
+  }
+
+
+  tradeCancelApprove(TradeRequestID, empKey, curDate) {
+    const url = ConectionSettings.Url + "/tradeCancelApprove";
+    const obj = {
+      todayDate: curDate,
+      traderequestID: TradeRequestID,
+      EmpKey: empKey
+    };
+    return this.http.post(url, obj);
+  }
 
 }

@@ -17,8 +17,7 @@
       <div style="margin-left: 45%;">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <img class="imagesize nav-link" src="assets/icons/homepage.png"
-              [routerLink]="[{outlets:{EmployeeOut:['Emp_welcomePage']}}]">
+            <img class="imagesize nav-link" src="assets/icons/homepage.png" [routerLink]="[{outlets:{EmployeeOut:['Emp_welcomePage']}}]">
           </li>
           <li class="nav-item dropdown">
             <img class="imagesize nav-link" src="assets/icons/work order.png">
@@ -31,24 +30,24 @@
             <div class="dropdown-content" style="margin-left:1rem;">
               <a class="dropdown-item" [routerLink]="[{outlets:{EmployeeOut:['Viewmeetingortrainingevent']}}]"><b>View
                   Meeting/Training/Event</b></a>
-              
-              
+
+
             </div>
           </li>
           <li *ngIf="isEmployeecalendar==1" class="nav-item dropdown" style="margin-left: -1rem;">
             <img class="imagesize nav-link" src="assets/icons/scheduling.png">
             <div class="dropdown-content" style="margin-left:1rem;">
               <a class="dropdown-item" [routerLink]="[{outlets:{EmployeeOut:['ViewSchedulerForEmployee']}}]"><b>View
-                Scheduler-Employee</b></a>
+                  Scheduler-Employee</b></a>
 
-            <a class="dropdown-item" [routerLink]="[{outlets:{EmployeeOut:['PtoRequest']}}]"><b>Create PTO
-                Request</b></a>
-            <a class="dropdown-item" [routerLink]="[{outlets:{EmployeeOut:['ViewPtoRequest']}}]"><b>View PTO
-                Request</b></a>
-              <!-- <a class="dropdown-item" [routerLink]="[{outlets:{EmployeeOut:['TradeRequest']}}]"><b>Create
+              <a class="dropdown-item" [routerLink]="[{outlets:{EmployeeOut:['PtoRequest']}}]"><b>Create PTO
+                  Request</b></a>
+              <a class="dropdown-item" [routerLink]="[{outlets:{EmployeeOut:['ViewPtoRequest']}}]"><b>View PTO
+                  Request</b></a>
+              <a class="dropdown-item" [routerLink]="[{outlets:{EmployeeOut:['TradeRequest']}}]"><b>Create
                   TradeRequest</b></a>
               <a class="dropdown-item" [routerLink]="[{outlets:{EmployeeOut:['ViewTradeRequest']}}]"><b>View
-                  TradeRequest</b></a> -->
+                  TradeRequest</b></a>
             </div>
           </li>
           <li class="nav-item dropdown">
