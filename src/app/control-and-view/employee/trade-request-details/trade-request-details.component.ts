@@ -80,7 +80,11 @@ export class TradeRequestDetailsComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(["/EmployeeDashboard", { outlets: { EmployeeOut: ["ViewTradeRequest"] } },]);
+    if (this.role == 'Employee') {
+      this.router.navigate(['/EmployeeDashboard', { outlets: { EmployeeOut: ['ViewTradeRequest'] } }]);
+    } else if (this.role == 'Supervisor') {
+      this.router.navigate(['/SupervisorDashboard', { outlets: { Superout: ['ViewTradeRequest'] } }]);
+    }
   }
 
   ngOnInit() {
@@ -116,14 +120,22 @@ export class TradeRequestDetailsComponent implements OnInit {
   cancelTrade() {
     this.PeopleServiceService.requestForTradeCancel(this.traderequestID$, this.toServeremployeekey, this.convert_DT(new Date())).subscribe((data) => {
       alert("Cancelling the trade requested successfully");
-      this.router.navigate(["/EmployeeDashboard", { outlets: { EmployeeOut: ["ViewTradeRequest"] } },]);
+      if (this.role == 'Employee') {
+        this.router.navigate(['/EmployeeDashboard', { outlets: { EmployeeOut: ['ViewTradeRequest'] } }]);
+      } else if (this.role == 'Supervisor') {
+        this.router.navigate(['/SupervisorDashboard', { outlets: { Superout: ['ViewTradeRequest'] } }]);
+      }
     });
   }
 
   cancelTradeApproval() {
     this.PeopleServiceService.tradeCancelApprove(this.traderequestID$, this.toServeremployeekey, this.convert_DT(new Date())).subscribe((data) => {
       alert("Trade request cancelled successfully");
-      this.router.navigate(["/EmployeeDashboard", { outlets: { EmployeeOut: ["ViewTradeRequest"] } },]);
+      if (this.role == 'Employee') {
+        this.router.navigate(['/EmployeeDashboard', { outlets: { EmployeeOut: ['ViewTradeRequest'] } }]);
+      } else if (this.role == 'Supervisor') {
+        this.router.navigate(['/SupervisorDashboard', { outlets: { Superout: ['ViewTradeRequest'] } }]);
+      }
     });
   }
 

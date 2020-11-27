@@ -1044,10 +1044,11 @@ export class PeopleServiceService {
     };
     return this.http.post(url, obj);
   }
-  getTradeRequestdetailsforManager(empKey, orgID) {
+  getTradeRequestdetailsforManager(tradeobj) {
+    const url = ConectionSettings.Url + '/getTradeRequestdetailsforManager';
     return this
       .http
-      .get(ConectionSettings.Url + '/getTradeRequestdetailsforManager?empKey=' + empKey + '&orgID=' + orgID);
+      .post(url, tradeobj);
   }
   getTradeRequestdetailsbyID(traderequestID) {
     return this
@@ -1376,4 +1377,9 @@ export class PeopleServiceService {
     return this.http.post(url, obj);
   }
 
+  getTradeStatus(orgID) {
+    return this
+      .http
+      .get(ConectionSettings.Url + '/getTradeStatus?orgID=' + orgID);
+  }
 }

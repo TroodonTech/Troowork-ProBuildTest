@@ -99,7 +99,11 @@ export class TradeRequestActionComponent implements OnInit {
     }
   }
   goBack() {
-    this.router.navigate(['/ManagerDashBoard', { outlets: { ManagerOut: ['TradeRequestsFromEmployees'] } }]);
+    if (this.role == 'Manager') {
+      this.router.navigate(['/ManagerDashBoard', { outlets: { ManagerOut: ['TradeRequestsFromEmployees'] } }]);
+    } else if (this.role == 'Supervisor') {
+      this.router.navigate(['/SupervisorDashboard', { outlets: { Superout: ['TradeRequestsFromEmployees'] } }]);
+    }
   }
   constructor(private PeopleServiceService: PeopleServiceService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe(params => this.traderequestDetails$ = params.requestID);
@@ -143,7 +147,7 @@ export class TradeRequestActionComponent implements OnInit {
       }
     } else if ((this.traderequestdetailsbyID.Status) == "Rejected") {
       if (!(this.traderequestdetailsbyID.ApproverComments)) {
-        alert("Status comments can't be empty");return;
+        alert("Status comments can't be empty"); return;
       }
       else {
         var comments = this.traderequestdetailsbyID.ApproverComments.trim();
@@ -158,7 +162,11 @@ export class TradeRequestActionComponent implements OnInit {
       .subscribe((data: any[]) => {
         this.details = data[0];
         alert("Request updated Successfully");
-        this.router.navigate(['/ManagerDashBoard', { outlets: { ManagerOut: ['TradeRequestsFromEmployees'] } }]);
+        if (this.role == 'Manager') {
+          this.router.navigate(['/ManagerDashBoard', { outlets: { ManagerOut: ['TradeRequestsFromEmployees'] } }]);
+        } else if (this.role == 'Supervisor') {
+          this.router.navigate(['/SupervisorDashboard', { outlets: { Superout: ['TradeRequestsFromEmployees'] } }]);
+        }
       });
   }
 

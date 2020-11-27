@@ -125,7 +125,11 @@ export class TradeRequestApproveComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/EmployeeDashboard', { outlets: { EmployeeOut: ['ViewTradeRequest'] } }]);
+    if (this.role == 'Employee') {
+      this.router.navigate(['/EmployeeDashboard', { outlets: { EmployeeOut: ['ViewTradeRequest'] } }]);
+    } else if (this.role == 'Supervisor') {
+      this.router.navigate(['/SupervisorDashboard', { outlets: { Superout: ['ViewTradeRequest'] } }]);
+    }
   }
   saveTradeRequestAction() {
 

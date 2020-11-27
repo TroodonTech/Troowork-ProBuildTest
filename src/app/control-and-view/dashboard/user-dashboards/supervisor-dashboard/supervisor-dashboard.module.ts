@@ -390,6 +390,11 @@ const routes: Routes = [
         outlet: 'Superout',
         loadChildren: '../../../manager/people/trade-request-action/trade-request-action.module#TradeRequestActionModule',
       },
+      {
+        path: 'TradeRequestsFromEmployees/TradeRequestDetails/:requestID',
+        outlet: 'Superout',
+        loadChildren: '../../../manager/people/trade-request-details/trade-request-details.module#TradeRequestDetailsModule',
+      },
     ]
   }
 ];

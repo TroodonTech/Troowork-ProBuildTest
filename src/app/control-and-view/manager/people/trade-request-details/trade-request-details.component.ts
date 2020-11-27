@@ -99,7 +99,11 @@ export class TradeRequestDetailsComponent implements OnInit {
     }
   }
   goBack() {
-    this.router.navigate(['/ManagerDashBoard', { outlets: { ManagerOut: ['TradeRequestsFromEmployees'] } }]);
+    if (this.role == 'Manager') {
+      this.router.navigate(['/ManagerDashBoard', { outlets: { ManagerOut: ['TradeRequestsFromEmployees'] } }]);
+    } else if (this.role == 'Supervisor') {
+      this.router.navigate(['/SupervisorDashboard', { outlets: { Superout: ['TradeRequestsFromEmployees'] } }]);
+    }
   }
   constructor(private PeopleServiceService: PeopleServiceService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe(params => this.traderequestDetails$ = params.requestID);

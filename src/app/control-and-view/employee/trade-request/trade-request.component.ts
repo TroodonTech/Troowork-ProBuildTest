@@ -113,7 +113,11 @@ export class TradeRequestComponent implements OnInit {
       .submitTradeRequest(this.curr_date, this.toServeremployeekey, this.OrganizationID, this.EmployeeKey, this.convert_DT(this.startdate),
         this.convert_DT(this.enddate), this.requestcomments).subscribe((data: any[]) => {
           alert("Trade Request Submitted Successfully");
-          this.router.navigate(['/EmployeeDashboard', { outlets: { EmployeeOut: ['ViewTradeRequest'] } }]);
+          if (this.role == 'Employee') {
+            this.router.navigate(['/EmployeeDashboard', { outlets: { EmployeeOut: ['ViewTradeRequest'] } }]);
+          } else if (this.role == 'Supervisor') {
+            this.router.navigate(['/SupervisorDashboard', { outlets: { Superout: ['ViewTradeRequest'] } }]);
+          }
         });
   }
 
