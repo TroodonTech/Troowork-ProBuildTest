@@ -22231,7 +22231,6 @@ app.get(securedpath + '/getTradeStatus', function (req, res) {
             console.log("Failed! Connection with Database spicnspan via connection pool failed");
         }
         else {
-            111
             console.log("Success! Connection with Database spicnspan via connection pool succeeded");
             connection.query('set @OrganizationID=?; call usp_getTradeStatus(@OrganizationID)', [OrganizationID], function (err, rows) {//IMPORTANT : (err,rows) this order matters.
                 if (err) {
@@ -22239,6 +22238,33 @@ app.get(securedpath + '/getTradeStatus', function (req, res) {
                 }
                 else {
                     res.end(JSON.stringify(rows[1]));
+                }
+            });
+        }
+        connection.release();
+    });
+});
+
+app.get(securedpath + '/employeesForSchedulerDropdown', function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    var groupID = url.parse(req.url, true).query['groupID'];
+    var empkey = url.parse(req.url, true).query['empkey'];
+    var OrganizationID = url.parse(req.url, true).query['OrganizationID'];
+
+    pool.getConnection(function (err, connection) {
+        if (err) {
+
+            console.log("Failed! Connection with Database spicnspan via connection pool failed");
+        }
+        else {
+            console.log("Success! Connection with Database spicnspan via connection pool succeeded");
+            connection.query('set@groupID=?;set @empkey=?;set @OrganizationID=?; call usp_getEmployeesForSchedulerDropdown(@groupID,@empkey,@OrganizationID)', [groupID, empkey, OrganizationID], function (err, rows) {//IMPORTANT : (err,rows) this order matters.
+                if (err) {
+                    console.log("Problem with MySQL" + err);
+                }
+                else {
+                    res.end(JSON.stringify(rows[3]));
                 }
             });
         }
