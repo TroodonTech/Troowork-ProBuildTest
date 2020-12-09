@@ -602,7 +602,7 @@ export class SchedulerComponent implements AfterViewInit {
       if (employeeKeListObj.length > 0) {
         if (employeeKeListObj) {
           for (var j = 0; j < employeeKeListObj.length; j++) {
-            employeeKeList.push(employeeKeListObj[j].EmployeeKey);
+            employeeKeList.push(employeeKeListObj[j].id);
           }
         }
         EmployeeKeyString = employeeKeList.join(',');
